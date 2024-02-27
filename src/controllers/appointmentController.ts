@@ -1,33 +1,102 @@
 import { Request, Response } from "express";
+import { Appointment } from "../models/Appointment";
+
 
 export const getAppointments = (req: Request, res: Response) => {
+    try {
+        res.status(200).json(
+            {
+                success: true,
+                message: 'Appointment retrieved succesfully'
+            }
+        )
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Couldnt retrieve appointment",
+            error: error
+        })
+    }
     res.status(200).json(
         {
             success: true,
-            message: 'Roles retrieved succesfully'
+            message: 'Appointment retrieved succesfully'
         }
     )
 }
-export const createAppointments = (req: Request, res: Response) => {
+export const createAppointments = async (req: Request, res: Response) => {
 
-    //recuperar info mediante body
-    console.log(req.body);
+    try {
+        const appointmentDate = req.body.appointmentDate
+
+        if (appointmentDate === null) {
+            return res.status(400).json({
+                success: false,
+                message: "Couldnt create appointmentDate"
+            })
+        }
+        const newAppointmentDate = await Appointment.create({
+            appointmentDate: appointmentDate
+        }).save()
+
+        res.status(200).json(
+            {
+                success: true,
+                message: 'Appointment Created succesfully'
+            }
+        )
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Couldnt create appointment",
+            error: error
+        })
+    }
+    const appointmentDate = req.body.appointmentDate
+
+    if (appointmentDate === null) {
+        return res.status(400).json({
+            success: false,
+            message: "Couldnt create appointmentDate"
+        })
+    }
+    const newAppointmentDate = await Appointment.create({
+        appointmentDate: appointmentDate
+    }).save()
+
     res.status(200).json(
         {
             success: true,
-            message: 'Roles Created succesfully'
+            message: 'Appointment Created succesfully'
         }
     )
 }
 export const updateAppointments = (req: Request, res: Response) => {
 
+    try {
+        req.params.id;
+        console.log(req.params.id)
+
+        res.status(200).json(
+            {
+                success: true,
+                message: 'appointment Updated succesfully'
+            }
+        )
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Couldnt update appointment",
+            error: error
+        })
+    }
     req.params.id;
     console.log(req.params.id)
 
     res.status(200).json(
         {
             success: true,
-            message: 'roles Updated succesfully'
+            message: 'appointment Updated succesfully'
         }
     )
 }
@@ -35,7 +104,7 @@ export const deleteAppointments = (req: Request, res: Response) => {
     res.status(200).json(
         {
             success: true,
-            message: 'roles deleted succesfully'
+            message: 'appointment deleted succesfully'
         }
     )
 }

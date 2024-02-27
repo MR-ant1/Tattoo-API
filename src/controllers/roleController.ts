@@ -119,6 +119,7 @@ export const deleteRoles = (req: Request, res: Response) => {
             error: error
         })
     }
+    req.params.id
     res.status(200).json(
         {
             success: true,

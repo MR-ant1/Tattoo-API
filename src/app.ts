@@ -16,10 +16,10 @@ app.put('/roles/:id', updateRoles)
 app.delete('/roles/:id', deleteRoles)
 
 //user routes
-app.get('/user', getUsers)
-app.post('user', createUsers)
-app.put('/user/:id', updateUsers)
-app.delete('/user/:id', deleteUsers)
+app.get('/users', getUsers)
+app.post('users', createUsers)
+app.put('/users/:id', updateUsers)
+app.delete('/users/:id', deleteUsers)
 
 //service routes
 
