@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-export const getAppointment = (req: Request, res: Response) => {
+export const getAppointments = (req: Request, res: Response) => {
     res.status(200).json(
         {
             success: true,
@@ -8,7 +8,7 @@ export const getAppointment = (req: Request, res: Response) => {
         }
     )
 }
-export const createAppointment = (req: Request, res: Response) => {
+export const createAppointments = (req: Request, res: Response) => {
 
     //recuperar info mediante body
     console.log(req.body);
@@ -19,7 +19,7 @@ export const createAppointment = (req: Request, res: Response) => {
         }
     )
 }
-export const updateAppointment = (req: Request, res: Response) => {
+export const updateAppointments = (req: Request, res: Response) => {
 
     req.params.id;
     console.log(req.params.id)
@@ -31,7 +31,7 @@ export const updateAppointment = (req: Request, res: Response) => {
         }
     )
 }
-export const deleteAppointment = (req: Request, res: Response) => {
+export const deleteAppointments = (req: Request, res: Response) => {
     res.status(200).json(
         {
             success: true,

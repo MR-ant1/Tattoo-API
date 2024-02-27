@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-export const getUser = (req: Request, res: Response) => {
+export const getUsers = (req: Request, res: Response) => {
     res.status(200).json(
         {
             success: true,
@@ -9,7 +9,7 @@ export const getUser = (req: Request, res: Response) => {
     )
 }
 
-export const createUser = (req: Request, res: Response) => {
+export const createUsers = (req: Request, res: Response) => {
     res.status(201).json(
         {
             success: true,
@@ -17,7 +17,7 @@ export const createUser = (req: Request, res: Response) => {
         }
     )
 }
-export const updateUser = (req: Request, res: Response) => {
+export const updateUsers = (req: Request, res: Response) => {
     res.status(200).json(
         {
             success: true,
@@ -25,7 +25,7 @@ export const updateUser = (req: Request, res: Response) => {
         }
     )
 }
-export const deleteUser = (req: Request, res: Response) => {
+export const deleteUsers = (req: Request, res: Response) => {
     res.status(200).json(
         {
             success: true,

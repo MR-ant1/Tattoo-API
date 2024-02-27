@@ -1,8 +1,8 @@
 import express, { Application } from "express";
 import { createRoles, deleteRoles, getRoles, updateRoles } from "./controllers/roleController";
-import { getUser, createUser, updateUser, deleteUser } from "./controllers/userController";
+import { createUsers, getUsers, updateUsers, deleteUsers } from "./controllers/userController";
 import { getServices, createServices, updateServices, deleteServices } from "./controllers/serviceController";
-import { getAppointment, createAppointment, updateAppointment, deleteAppointment } from "./controllers/appointmentController"
+import { getAppointments, createAppointments, updateAppointments, deleteAppointments } from "./controllers/appointmentController"
 
 
 export const app: Application = express();
@@ -16,10 +16,10 @@ app.put('/roles/:id', updateRoles)
 app.delete('/roles/:id', deleteRoles)
 
 //user routes
-app.get('/user', getUser)
-app.post('user', createUser)
-app.put('/user/:id', updateUser)
-app.delete('/user/:id', deleteUser)
+app.get('/user', getUsers)
+app.post('user', createUsers)
+app.put('/user/:id', updateUsers)
+app.delete('/user/:id', deleteUsers)
 
 //service routes
 
@@ -30,7 +30,7 @@ app.delete('/services/:id', deleteServices)
 
 //appointment routes
 
-app.get('/appointments', getAppointment)
-app.post('/appointments', createAppointment)
-app.put('/appointments/:id', updateAppointment)
-app.delete('/appointments/:id', deleteAppointment)
+app.get('/appointments', getAppointments)
+app.post('/appointments', createAppointments)
+app.put('/appointments/:id', updateAppointments)
+app.delete('/appointments/:id', deleteAppointments)

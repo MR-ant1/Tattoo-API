@@ -1,10 +1,13 @@
 import { BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { User } from "./User"
 
 @Entity('roles')
 export class Role extends BaseEntity {
-   @PrimaryGeneratedColumn() 
+    @PrimaryGeneratedColumn()
     id!: number
-    @Column({name: 'name'})
-    name!: string
-   
+    @Column({ name: 'name' })
+    name!: Date
+
+    @OneToMany(() => User, (users) => users.roles)
+    users!: User
 }
