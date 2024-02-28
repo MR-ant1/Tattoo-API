@@ -17,13 +17,13 @@ export const getUsers = async (req: Request, res: Response) => {
            return res.status(404).json({
                 success: false,
                 message: "There is no USers!",
-                data: users
             })
         }
         res.status(200).json(
             {
                 success: true,
-                message: 'Users retrieved succesfully'
+                message: 'Users retrieved succesfully',
+                data: users
             }
         )
     } catch (error) {

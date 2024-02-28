@@ -3,7 +3,7 @@ import { createRoles, deleteRoles, getRoles, updateRoles } from "./controllers/r
 import { createUsers, getUsers, updateUsers, deleteUsers, getUserById } from "./controllers/userController";
 import { getServices, createServices, updateServices, deleteServices } from "./controllers/serviceController";
 import { getAppointments, createAppointments, updateAppointments, deleteAppointments } from "./controllers/appointmentController"
-import { register } from "./controllers/authController";
+import { registerUser } from "./controllers/authController";
 
 
 export const app: Application = express();
@@ -38,5 +38,4 @@ app.put('/api/appointments/:id', updateAppointments)
 app.delete('/api/appointments/:id', deleteAppointments)
 
 //auth routes
-
-app.post('/api/register', register)
+app.post('/api/register', registerUser)
