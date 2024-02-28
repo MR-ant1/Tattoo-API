@@ -1,8 +1,16 @@
 import { Request, Response } from "express"
 import { Role } from "../models/Role"
 
-export const getRoles = (req: Request, res: Response) => {
+export const getRoles = async (req: Request, res: Response) => {
     try {
+        const roles = await Role.find(
+            {                          
+                select: {
+                    id: true,
+                    name: true
+                }
+            }
+        )
         res.status(200).json(
             {
                 success: true,
