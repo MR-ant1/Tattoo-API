@@ -6,6 +6,7 @@ import { User } from "./User"
 export class Appointment extends BaseEntity {
     @PrimaryGeneratedColumn()
     id!: number
+
     @Column()
     appointmentDate!: Date
 

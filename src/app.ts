@@ -3,6 +3,7 @@ import { createRoles, deleteRoles, getRoles, updateRoles } from "./controllers/r
 import { createUsers, getUsers, updateUsers, deleteUsers } from "./controllers/userController";
 import { getServices, createServices, updateServices, deleteServices } from "./controllers/serviceController";
 import { getAppointments, createAppointments, updateAppointments, deleteAppointments } from "./controllers/appointmentController"
+import { register } from "./controllers/authController";
 
 
 export const app: Application = express();
@@ -10,27 +11,31 @@ export const app: Application = express();
 app.use(express.json());
 
 //roles routes
-app.get('/roles', getRoles)
-app.post('/roles', createRoles)
-app.put('/roles/:id', updateRoles)
-app.delete('/roles/:id', deleteRoles)
+app.get('/api/roles', getRoles)
+app.post('/api/roles', createRoles)
+app.put('/api/roles/:id', updateRoles)
+app.delete('/api/roles/:id', deleteRoles)
 
 //user routes
-app.get('/users', getUsers)
-app.post('users', createUsers)
-app.put('/users/:id', updateUsers)
-app.delete('/users/:id', deleteUsers)
+app.get('/api/users', getUsers)
+app.post('api/users', createUsers)
+app.put('/api/users/:id', updateUsers)
+app.delete('/api/users/:id', deleteUsers)
 
 //service routes
 
-app.get('/services', getServices)
-app.post('/services', createServices)
-app.put('/services/:id', updateServices)
-app.delete('/services/:id', deleteServices)
+app.get('/api/services', getServices)
+app.post('/api/services', createServices)
+app.put('/api/services/:id', updateServices)
+app.delete('/api/services/:id', deleteServices)
 
 //appointment routes
 
-app.get('/appointments', getAppointments)
-app.post('/appointments', createAppointments)
-app.put('/appointments/:id', updateAppointments)
-app.delete('/appointments/:id', deleteAppointments)
+app.get('/api/appointments', getAppointments)
+app.post('/api/appointments', createAppointments)
+app.put('/api/appointments/:id', updateAppointments)
+app.delete('/api/appointments/:id', deleteAppointments)
+
+//auth routes
+
+app.post('/api/register', register)

@@ -16,12 +16,6 @@ export const getServices = (req: Request, res: Response) => {
             error: error
         })
     }
-    res.status(200).json(
-        {
-            success: true,
-            message: 'Services retrieved succesfully'
-        }
-    )
 }
 export const createServices = async (req: Request, res: Response) => {
 
@@ -64,37 +58,7 @@ export const createServices = async (req: Request, res: Response) => {
             error: error
         })
     }
-    const serviceName = req.body.serviceName
-
-    if (serviceName.length > 255 || serviceName) {
-        return res.status(400).json({
-            success: false,
-            message: "Couldnt create firstName"
-        })
-    }
-    const newServiceName = await Service.create({
-        serviceName: serviceName
-    }).save()
-
-
-    const description = req.body.description
-
-    if (description.length > 255 || description === null) {
-        return res.status(400).json({
-            success: false,
-            message: "Couldnt create firstName"
-        })
-    }
-    const newDescription = await Service.create({
-        description: description
-    }).save()
-
-    res.status(200).json(
-        {
-            success: true,
-            message: 'Services Created succesfully'
-        }
-    )
+    
 }
 export const updateServices = (req: Request, res: Response) => {
 
@@ -115,15 +79,6 @@ export const updateServices = (req: Request, res: Response) => {
             error: error
         })
     }
-    req.params.id;
-    console.log(req.params.id)
-
-    res.status(200).json(
-        {
-            success: true,
-            message: 'Services updated succesfully'
-        }
-    )
 }
 export const deleteServices = (req: Request, res: Response) => {
     try {
@@ -141,11 +96,4 @@ export const deleteServices = (req: Request, res: Response) => {
             error: error
         })
     }
-    req.params.id
-    res.status(200).json(
-        {
-            success: true,
-            message: 'Services deleted succesfully'
-        }
-    )
 }

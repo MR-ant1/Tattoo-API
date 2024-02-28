@@ -5,8 +5,10 @@ import { Appointment } from "./Appointment"
 export class Service extends BaseEntity {
     @PrimaryGeneratedColumn()
     id!: number
+
     @Column()
     serviceName!: string
+
     @Column()
     description!: string
 
