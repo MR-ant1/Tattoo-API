@@ -61,6 +61,22 @@ export const getUserById = async (req: Request, res: Response) => {
     }
 }
 
+export const getProfile = async (req: Request, res: Response) => {
+    try {          //  |  DE NUEVO HAY QUE INCLUIR ANY PARA PODER TRAER MAS ABAJO EL userId DEL TOKEN
+        const userId: any = req.tokenData.userId
+        const profile = await User.findOneBy({
+            id: parseInt(userId)
+        })    
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "user cant be retrieved",
+            error: error
+        })
+    }
+}
+
 export const createUsers = async (req: Request, res: Response) => {
     try {
         const firstName = req.body.firstName
@@ -116,6 +132,7 @@ export const createUsers = async (req: Request, res: Response) => {
         })
     }
 }
+
 export const updateUsers = (req: Request, res: Response) => {
     try {
         req.params.id

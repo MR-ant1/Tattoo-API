@@ -1,10 +1,11 @@
 import express, { Application } from "express";
 import { createRoles, deleteRoles, getRoles, updateRoles } from "./controllers/roleController";
-import { createUsers, getUsers, updateUsers, deleteUsers, getUserById } from "./controllers/userController";
+import { createUsers, getUsers, updateUsers, deleteUsers, getUserById, getProfile } from "./controllers/userController";
 import { getServices, createServices, updateServices, deleteServices } from "./controllers/serviceController";
 import { getAppointments, createAppointments, updateAppointments, deleteAppointments } from "./controllers/appointmentController"
 import { login, registerUser } from "./controllers/authController";
 import { auth } from "./middlewares/auth";
+import { isSuperAdmin } from "./middlewares/isSuperAdmin";
 
 
 export const app: Application = express();
@@ -18,16 +19,17 @@ app.put('/api/roles/:id', updateRoles)
 app.delete('/api/roles/:id', deleteRoles)
 
 //user routes
-app.get('/api/users', getUsers)
-app.get("/api/users/:id", getUserById)
-app.post('api/users', createUsers)
+app.get('/api/users', auth, isSuperAdmin, getUsers)
+app.get("/api/users/:id", auth, isSuperAdmin, getUserById)
+app.get("/api/users/profile", auth, getProfile)
+app.post('api/users', auth, isSuperAdmin, createUsers)
 app.put('/api/users/:id', updateUsers)
 app.delete('/api/users/:id', deleteUsers)
 
 //service routes
 
 app.get('/api/services', getServices)
-app.post('/api/services', createServices)
+app.post('/api/services', auth, isSuperAdmin, createServices)
 app.put('/api/services/:id', updateServices)
 app.delete('/api/services/:id', deleteServices)
 
@@ -40,4 +42,4 @@ app.delete('/api/appointments/:id', deleteAppointments)
 
 //auth routes
 app.post('/api/auth/register', registerUser) 
-app.post('/api/auth/login', auth, login)
+app.post('/api/auth/login', login)

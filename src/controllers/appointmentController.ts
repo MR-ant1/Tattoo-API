@@ -2,18 +2,21 @@ import { Request, Response } from "express";
 import { Appointment } from "../models/Appointment";
 
 
-export const getAppointments = (req: Request, res: Response) => {
+export const getAppointments = async (req: Request, res: Response) => {
     try {
+        const appointments = await Appointment.find()
+
         res.status(200).json(
             {
                 success: true,
-                message: 'Appointment retrieved succesfully'
+                message: 'Appointments retrieved succesfully',
+                data: appointments
             }
         )
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Couldnt retrieve appointment",
+            message: 'Couldnt retrieve appointments',
             error: error
         })
     }
@@ -70,15 +73,15 @@ export const updateAppointments = (req: Request, res: Response) => {
 export const deleteAppointments = (req: Request, res: Response) => {
     try {
         res.status(200).json(
-        {
-            success: true,
-            message: 'appointment deleted succesfully'
-        }
-    )
+            {
+                success: true,
+                message: 'appointment deleted succesfully'
+            }
+        )
     } catch (error) {
-        res.status(500).json ({
+        res.status(500).json({
             success: false,
             message: "Couldnt delete appointment"
         })
     }
-    }
+}
