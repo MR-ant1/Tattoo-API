@@ -1,12 +1,22 @@
 import { Request, Response } from "express";
 import { Service } from "../models/Service";
 
-export const getServices = (req: Request, res: Response) => {
+export const getServices = async (req: Request, res: Response) => {
     try {
+        const services = await Service.find(
+            {
+                select: {
+                    id: true,
+                    serviceName: true,
+                    description: true
+                }
+            }
+        )
         res.status(200).json(
             {
                 success: true,
-                message: 'Services retrieved succesfully'
+                message: 'Services retrieved succesfully',
+                data: services
             }
         )
     } catch (error) {
@@ -58,7 +68,7 @@ export const createServices = async (req: Request, res: Response) => {
             error: error
         })
     }
-    
+
 }
 export const updateServices = (req: Request, res: Response) => {
 

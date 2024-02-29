@@ -6,10 +6,10 @@ export class Service extends BaseEntity {
     @PrimaryGeneratedColumn()
     id!: number
 
-    @Column()
-    serviceName!: string
+    @Column({name: "service_name"})
+    serviceName!: string //!!!!!!!!!!! PERO BUAAAT
 
-    @Column()
+    @Column({name: "description"})
     description!: string
 
     @OneToMany(() => Appointment, (appointments) => appointments.services)

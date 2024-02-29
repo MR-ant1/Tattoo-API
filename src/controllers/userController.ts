@@ -4,7 +4,7 @@ import { User } from "../models/User";
 export const getUsers = async (req: Request, res: Response) => {
     try {
         const users = await User.find(
-            {                          
+            {
                 select: {
                     id: true,
                     firstName: true,
@@ -14,7 +14,7 @@ export const getUsers = async (req: Request, res: Response) => {
             }
         )
         if (!users) {
-           return res.status(404).json({
+            return res.status(404).json({
                 success: false,
                 message: "There is no USers!",
             })

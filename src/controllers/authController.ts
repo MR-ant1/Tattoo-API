@@ -10,7 +10,7 @@ export const registerUser = async (req: Request, res: Response) => {
         const password = req.body.password
 
 
-        if (password.length < 6 || password.length > 10) {
+        if (password.length < 8 || password.length > 20) {
             return res.status(400).json({
                 success: false,
                 message: "Password must contain between 6 and 10 characters"
@@ -35,7 +35,7 @@ export const registerUser = async (req: Request, res: Response) => {
             lastName: lastName,
             email: email,
             password: passwordEncrypted,
-            roles: { id:1}
+            roles: { id: 1 }
         }).save()
         res.status(201).json({
             success: true,
