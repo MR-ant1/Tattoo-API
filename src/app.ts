@@ -4,6 +4,7 @@ import { createUsers, getUsers, updateUsers, deleteUsers, getUserById } from "./
 import { getServices, createServices, updateServices, deleteServices } from "./controllers/serviceController";
 import { getAppointments, createAppointments, updateAppointments, deleteAppointments } from "./controllers/appointmentController"
 import { login, registerUser } from "./controllers/authController";
+import { auth } from "./middlewares/auth";
 
 
 export const app: Application = express();
@@ -39,4 +40,4 @@ app.delete('/api/appointments/:id', deleteAppointments)
 
 //auth routes
 app.post('/api/auth/register', registerUser) 
-app.post('/api/auth/login', login)
+app.post('/api/auth/login', auth, login)

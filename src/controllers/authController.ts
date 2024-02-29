@@ -74,7 +74,7 @@ export const login = async (req: Request, res: Response) => {
                 }
             )
         }
-                //DE MANERA TEMPORAL SE INCLUYE ANY AL NO PODER DELCARARSE USER EN LA VERIFICACION DE CONTRASEÑA
+                //   |  DE MANERA TEMPORAL SE INCLUYE ANY AL NO PODER DELCARARSE USER EN LA VERIFICACION DE CONTRASEÑA
         const user: any = await User.findOne(
             {
                 where: {
