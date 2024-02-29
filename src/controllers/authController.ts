@@ -74,7 +74,7 @@ export const login = async (req: Request, res: Response) => {
                 }
             )
         }
-
+                //DE MANERA TEMPORAL SE INCLUYE ANY AL NO PODER DELCARARSE USER EN LA VERIFICACION DE CONTRASEÑA
         const user: any = await User.findOne(
             {
                 where: {
@@ -110,9 +110,22 @@ export const login = async (req: Request, res: Response) => {
                 message: "Email or password invalid"
             })
         }
+
+        const token = jwt.sign(
+            {
+                userId: user.id,
+                roleName: user.role.name
+            },
+            process.env.JWT_SECRET as string,
+            {
+                expiresIn: "2h"
+            }
+        )
+
         res.status(200).json({
             success: true,
             message: "User logged succesfully",
+            token: token //MOSTRAMOS EL TOKEN DE MANERA TEMPORAL PARA PODER PROBAR CON ÉL OTRA FUNCIONALIDADES
         })
 
     } catch (error) {
