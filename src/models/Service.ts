@@ -7,7 +7,7 @@ export class Service extends BaseEntity {
     id!: number
 
     @Column({name: "service_name"})
-    serviceName!: string //!!!!!!!!!!! PERO BUAAAT
+    serviceName!: string
 
     @Column({name: "description"})
     description!: string
