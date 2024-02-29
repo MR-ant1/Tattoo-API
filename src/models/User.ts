@@ -21,7 +21,7 @@ export class User extends BaseEntity {
 
     @ManyToOne(() => Role, (roles) => roles.users)
     @JoinColumn({ name: 'role_id' })
-    roles!: Role
+    role!: Role
 
     @OneToMany(() => Appointment, (appointments) => appointments.users)
     appointments!: Appointment

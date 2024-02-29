@@ -4,7 +4,7 @@ import { Role } from "../models/Role"
 export const getRoles = async (req: Request, res: Response) => {
     try {
         const roles = await Role.find(
-            {                          
+            {
                 select: {
                     id: true,
                     name: true
@@ -14,7 +14,8 @@ export const getRoles = async (req: Request, res: Response) => {
         res.status(200).json(
             {
                 success: true,
-                message: 'Roles retrieved succesfully'
+                message: 'Roles retrieved succesfully',
+                data: roles
             }
         )
     } catch (error) {
@@ -26,7 +27,6 @@ export const getRoles = async (req: Request, res: Response) => {
     }
 }
 export const createRoles = async (req: Request, res: Response) => {
-    //recuperar info mediante body
     try {
         const name = req.body.name
 
