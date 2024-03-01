@@ -17,7 +17,7 @@ export const getUsers = async (req: Request, res: Response) => {
         if (!users) {
             return res.status(404).json({
                 success: false,
-                message: "There is no USers!",
+                message: "There is no Users!",
             })
         }
         res.status(200).json(
@@ -64,15 +64,15 @@ export const getUserById = async (req: Request, res: Response) => {
 
 export const getProfile = async (req: Request, res: Response) => {
     try {          
-        const userId = req.params.id
-        if (req.tokenData.userId !== parseInt(userId)) {
-            res.status(401).json({
+        const userId = req.tokenData.userId
+        if (req.tokenData.userId !== (userId)) {
+            res.status(400).json({
                 success: false,
                 message:"profile couldnt retrieve"
             })
         }
         const user = await User.findOneBy(
-            {id: parseInt(userId)}
+            {id: (userId)}
             
         )
         res.status(200).json ({
@@ -89,7 +89,7 @@ export const getProfile = async (req: Request, res: Response) => {
     }
 }
 
-export const updateUsers = (req: Request, res: Response) => {
+export const updateProfile = (req: Request, res: Response) => {
     try {
         req.params.id
         res.status(200).json(
