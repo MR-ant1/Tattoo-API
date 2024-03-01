@@ -1,6 +1,6 @@
 import express, { Application } from "express";
 import { createRoles, deleteRoles, getRoles, updateRoles } from "./controllers/roleController";
-import { createUsers, getUsers, updateUsers, deleteUsers, getUserById, getProfile } from "./controllers/userController";
+import { getUsers, updateUsers, deleteUsers, getUserById, getProfile } from "./controllers/userController";
 import { getServices, createServices, updateServices, deleteServices } from "./controllers/serviceController";
 import { getAppointments, createAppointments, updateAppointments, deleteAppointments } from "./controllers/appointmentController"
 import { login, registerUser } from "./controllers/authController";
@@ -21,8 +21,8 @@ app.delete('/api/roles/:id', deleteRoles)
 //user routes
 app.get('/api/users', auth, isSuperAdmin, getUsers)
 app.get("/api/users/:id", auth, isSuperAdmin, getUserById)
-app.get("/api/users/profile", auth, getProfile)
-app.post('api/users', auth, isSuperAdmin, createUsers)
+app.get("/api/users/profile/:id", auth, getProfile)
+app.post('api/users', auth, isSuperAdmin)
 app.put('/api/users/:id', updateUsers)
 app.delete('/api/users/:id', deleteUsers)
 
@@ -41,5 +41,5 @@ app.put('/api/appointments/:id', updateAppointments)
 app.delete('/api/appointments/:id', deleteAppointments)
 
 //auth routes
-app.post('/api/auth/register', registerUser) 
+app.post('/api/auth/register', registerUser)
 app.post('/api/auth/login', login)

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { User } from "../models/User";
+import { profile } from "console";
 
 export const getUsers = async (req: Request, res: Response) => {
     try {
@@ -39,7 +40,7 @@ export const getUserById = async (req: Request, res: Response) => {
     try {
         const userId = req.params.id
         const user = await User.findOneBy({
-            id: parseInt(userId)
+        id: parseInt(userId)
         })
         if (!user) {
             return res.status(404).json({
@@ -62,72 +63,27 @@ export const getUserById = async (req: Request, res: Response) => {
 }
 
 export const getProfile = async (req: Request, res: Response) => {
-    try {          //  |  DE NUEVO HAY QUE INCLUIR ANY PARA PODER TRAER MAS ABAJO EL userId DEL TOKEN
-        const userId: any = req.tokenData.userId
-        const profile = await User.findOneBy({
-            id: parseInt(userId)
-        })    
-
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "user cant be retrieved",
-            error: error
-        })
-    }
-}
-
-export const createUsers = async (req: Request, res: Response) => {
-    try {
-        const firstName = req.body.firstName
-        const lastName = req.body.lastName
-        const email = req.body.email
-        const password = req.body.password
-
-        if (firstName.length > 255 || firstName === null) {
-            return res.status(400).json({
+    try {          
+        const userId = req.params.id
+        if (req.tokenData.userId !== parseInt(userId)) {
+            res.status(401).json({
                 success: false,
-                message: "Couldnt create firstName"
+                message:"profile couldnt retrieve"
             })
         }
-
-        if (lastName.length > 255 || lastName === null) {
-            return res.status(400).json({
-                success: false,
-                message: "Couldnt create lastName"
-            })
-        }
-
-        if (email.length > 255 || email === null) {
-            return res.status(400).json({
-                success: false,
-                message: "Couldnt create Password"
-            })
-        }
-
-        if (password.length > 255 || password === null) {
-            return res.status(400).json({
-                success: false,
-                message: "Couldn create Password",
-            })
-        }
-        const newUser = await User.create({
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password
-        }).save()
-
-        res.status(201).json(
-            {
-                success: true,
-                message: "User created succesfully"
-            }
+        const user = await User.findOneBy(
+            {id: parseInt(userId)}
+            
         )
+        res.status(200).json ({
+            success: true,
+            message:"Profile retrieved succesfully",
+            data: user
+        })
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Couldnt create user",
+            message: "Profile cant be retrieved",
             error: error
         })
     }

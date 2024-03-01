@@ -5,7 +5,7 @@ export const isSuperAdmin = (req: Request, res: Response, next: NextFunction) =>
         if (req.tokenData.roleName !== "super_admin") {
             return res.status(401).json({
                 success: false,
-                message:"You dont have authorization"
+                message: "You dont have authorization"
             })
         }
     } catch (error) {
