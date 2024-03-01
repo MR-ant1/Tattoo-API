@@ -23,7 +23,7 @@ app.get('/api/users', auth, isSuperAdmin, getUsers)
 app.get("/api/users/profile", auth, getProfile)
 app.get("/api/users/:id", auth, isSuperAdmin, getUserById)
 app.post('api/users', auth, isSuperAdmin)
-app.put('/api/users/:id', updateProfile)
+app.put("/api/users/profile", auth, updateProfile)
 app.delete('/api/users/:id', deleteUsers)
 
 //service routes
@@ -34,7 +34,7 @@ app.delete('/api/services/:id', deleteServices)
 
 //appointment routes
 app.get('/api/appointments', getAppointments)
-app.post('/api/appointments', createAppointments)
+app.post('/api/appointments', auth, createAppointments)
 app.put('/api/appointments/:id', updateAppointments)
 app.delete('/api/appointments/:id', deleteAppointments)
 

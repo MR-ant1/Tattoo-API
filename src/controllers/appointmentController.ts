@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { Appointment } from "../models/Appointment";
 
-
 export const getAppointments = async (req: Request, res: Response) => {
     try {
         const appointments = await Appointment.find()
@@ -25,15 +24,28 @@ export const createAppointments = async (req: Request, res: Response) => {
 
     try {
         const appointmentDate = req.body.appointmentDate
+        const serviceId = req.body.service_id
+        const userId = req.tokenData.userId
 
-        if (appointmentDate === null) {
-            return res.status(400).json({
+        console.log(serviceId)
+
+        if (!serviceId) {
+            res.status(400).json({
                 success: false,
-                message: "Couldnt create appointmentDate"
+                message: "service_id is required"
+            })
+        }
+
+        if (appointmentDate === null || appointmentDate < Date.now()) {
+            return res.status(401).json({
+                success: false,
+                message: "Couldnt create appointment"
             })
         }
         const newAppointmentDate = await Appointment.create({
-            appointmentDate: appointmentDate
+            appointmentDate: appointmentDate,
+            services: {id: serviceId},
+            users: {id: userId}
         }).save()
 
         res.status(200).json(

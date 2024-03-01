@@ -40,7 +40,7 @@ export const getUserById = async (req: Request, res: Response) => {
     try {
         const userId = req.params.id
         const user = await User.findOneBy({
-        id: parseInt(userId)
+            id: parseInt(userId)
         })
         if (!user) {
             return res.status(404).json({
@@ -63,21 +63,21 @@ export const getUserById = async (req: Request, res: Response) => {
 }
 
 export const getProfile = async (req: Request, res: Response) => {
-    try {          
+    try {
         const userId = req.tokenData.userId
         if (req.tokenData.userId !== (userId)) {
             res.status(400).json({
                 success: false,
-                message:"profile couldnt retrieve"
+                message: "profile couldnt retrieve"
             })
         }
         const user = await User.findOneBy(
-            {id: (userId)}
-            
+            { id: (userId) }
+
         )
-        res.status(200).json ({
+        res.status(200).json({
             success: true,
-            message:"Profile retrieved succesfully",
+            message: "Profile retrieved succesfully",
             data: user
         })
     } catch (error) {
@@ -89,23 +89,39 @@ export const getProfile = async (req: Request, res: Response) => {
     }
 }
 
-export const updateProfile = (req: Request, res: Response) => {
-    try {
-        req.params.id
-        res.status(200).json(
-            {
-                success: true,
-                message: "User updated succesfully"
-            }
-        )
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Couldnt update User",
-            error: error
-        })
-    }
-}
+export const updateProfile = async (req:Request, res: Response) => {
+    try {   
+           const userId = req.tokenData.userId
+           const firstName = req.body.firstName
+           const lastName = req.body.lastName
+           const email = req.body.email
+           const password = req.body.password
+   
+           if (!firstName || !lastName || !email || !password){
+               res.status(400).json ({
+                   success: false,
+                   message:"Name, email and password are needed"
+               })
+           }
+           const userUpdated = User.update (
+              {id: userId,},
+              { firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: password} 
+           )
+       res.status(200).json({
+           success: true,
+           message:"user updated",
+           data: userUpdated
+       })
+   } catch (error) {
+       res.status(500).json({
+           success: false,
+           message: "can't update user",
+           error: error
+       })
+   }}
 export const deleteUsers = (req: Request, res: Response) => {
     try {
         req.params.id

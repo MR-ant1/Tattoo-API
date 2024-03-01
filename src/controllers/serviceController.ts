@@ -4,7 +4,7 @@ import { Service } from "../models/Service";
 export const getServices = async (req: Request, res: Response) => {
     try {
         const users = await Service.find()
-    
+
         res.status(200).json(
             {
                 success: true,
@@ -36,7 +36,7 @@ export const createServices = async (req: Request, res: Response) => {
             serviceName: serviceName,
             description: serviceDescription
         }).save()
-        
+
         res.status(200).json(
             {
                 success: true,
