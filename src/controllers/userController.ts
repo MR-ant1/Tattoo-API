@@ -108,7 +108,8 @@ export const updateProfile = async (req:Request, res: Response) => {
               { firstName: firstName,
                 lastName: lastName,
                 email: email,
-                password: password} 
+                password: password,
+                } 
            )
        res.status(200).json({
            success: true,

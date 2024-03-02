@@ -24,7 +24,7 @@ export const createAppointments = async (req: Request, res: Response) => {
 
     try {
         const appointmentDate = req.body.appointmentDate
-        const serviceId = req.body.service_id
+        const serviceId = req.body.serviceId
         const userId = req.tokenData.userId
 
         console.log(serviceId)
@@ -36,7 +36,7 @@ export const createAppointments = async (req: Request, res: Response) => {
             })
         }
 
-        if (appointmentDate === null || appointmentDate < Date.now()) {
+        if (appointmentDate < Date.now()) {
             return res.status(401).json({
                 success: false,
                 message: "Couldnt create appointment"
@@ -44,8 +44,8 @@ export const createAppointments = async (req: Request, res: Response) => {
         }
         const newAppointmentDate = await Appointment.create({
             appointmentDate: appointmentDate,
-            services: {id: serviceId},
-            users: {id: userId}
+            services: { id: parseInt(serviceId) },
+            users: { id: userId }
         }).save()
 
         res.status(200).json(
@@ -62,22 +62,37 @@ export const createAppointments = async (req: Request, res: Response) => {
         })
     }
 }
-export const updateAppointments = (req: Request, res: Response) => {
-
+export const updateAppointment = async (req: Request, res: Response) => {
     try {
-        req.params.id;
-        console.log(req.params.id)
 
-        res.status(200).json(
+        const appointmentId = req.body.appointmentId
+        const appointmentDate = req.body.appointmentDate
+        const userId = req.tokenData.userId
+
+
+        if (!appointmentDate) {
+            res.status(400).json({
+                success: false,
+                message: "any date is needed"
+            })
+        }
+        const newDate = Appointment.update(
+            { users: { id: userId } },
             {
-                success: true,
-                message: 'appointment Updated succesfully'
+                id: appointmentId,
+                appointmentDate: appointmentDate
             }
         )
+
+        res.status(200).json({
+            success: true,
+            message: "appointment updated",
+            data: newDate
+        })
     } catch (error) {
         res.status(500).json({
             success: false,
-            message: "Couldnt update appointment",
+            message: "can't update appointment",
             error: error
         })
     }
