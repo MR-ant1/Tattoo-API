@@ -104,7 +104,7 @@ export const updateProfile = async (req:Request, res: Response) => {
                })
            }
            const userUpdated = User.update (
-              {id: userId,},
+              {id: userId},
               { firstName: firstName,
                 lastName: lastName,
                 email: email,

@@ -1,15 +1,26 @@
 import { Request, Response } from "express";
 import { Appointment } from "../models/Appointment";
 
-export const getAppointments = async (req: Request, res: Response) => {
+export const getMyAppointments = async (req: Request, res: Response) => {
     try {
-        const appointments = await Appointment.find()
+
+        const userId = req.tokenData.userId
+
+        const myAppointments = await Appointment.find({
+            select: {
+                id: true,
+                appointmentDate: true,
+                
+                
+            }
+        }
+        )
 
         res.status(200).json(
             {
                 success: true,
                 message: 'Appointments retrieved succesfully',
-                data: appointments
+                data: myAppointments
             }
         )
     } catch (error) {
@@ -20,14 +31,46 @@ export const getAppointments = async (req: Request, res: Response) => {
         })
     }
 }
+
+
+export const getAnAppointment = async (req: Request, res: Response) => {
+    try {
+
+        const userId = req.tokenData.userId
+        const AppointmentId = req.params.id
+
+        const appointment = await Appointment.findOneBy({id:parseInt(AppointmentId)})
+            
+
+        if (!appointment) {
+            return res.status(401).json({
+                success: false,
+                message:"there no appointment"
+            })
+        }
+
+        res.status(200).json(
+            {
+                success: true,
+                message: 'Appointment retrieved succesfully',
+                data: appointment
+            }
+        )
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Couldnt retrieve appointment',
+            error: error
+        })
+    }
+}
+
 export const createAppointments = async (req: Request, res: Response) => {
 
     try {
         const appointmentDate = req.body.appointmentDate
         const serviceId = req.body.serviceId
         const userId = req.tokenData.userId
-
-        console.log(serviceId)
 
         if (!serviceId) {
             res.status(400).json({
@@ -36,7 +79,7 @@ export const createAppointments = async (req: Request, res: Response) => {
             })
         }
 
-        if (appointmentDate < Date.now()) {
+        if (appointmentDate < Date.now() || !appointmentDate) {
             return res.status(401).json({
                 success: false,
                 message: "Couldnt create appointment"
@@ -44,7 +87,7 @@ export const createAppointments = async (req: Request, res: Response) => {
         }
         const newAppointmentDate = await Appointment.create({
             appointmentDate: appointmentDate,
-            services: { id: parseInt(serviceId) },
+            service: { id: parseInt(serviceId) },
             users: { id: userId }
         }).save()
 
