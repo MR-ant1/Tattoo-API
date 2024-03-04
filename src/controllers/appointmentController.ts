@@ -9,16 +9,16 @@ export const getMyAppointments = async (req: Request, res: Response) => {
 
         const myAppointments = await Appointment.find(
             {
-              where :{
-                user: {id: userId}
-              },
-              
-              select: {
-                id: true,
-                appointmentDate: true,
-              }
+                where: {
+                    user: { id: userId }
+                },
+
+                select: {
+                    id: true,
+                    appointmentDate: true,
+                }
             }
-          )
+        )
 
         res.status(200).json(
             {
@@ -42,20 +42,20 @@ export const getAnAppointment = async (req: Request, res: Response) => {
 
         const userId = req.tokenData.userId
         const AppointmentId = req.params.id
-        
 
-        const myAppointment = await Appointment.findOne({ where: {id: parseInt(AppointmentId)}})
-        
+
+        const myAppointment = await Appointment.findOne({ where: { id: parseInt(AppointmentId) } })
+
         if (req.tokenData.userId !== userId)
-        
-        if (!myAppointment) {
-            return res.status(401).json({
-                success: false,
-                message: "there no appointment"
-            })
-        }
-      
-       
+
+            if (!myAppointment) {
+                return res.status(401).json({
+                    success: false,
+                    message: "there no appointment"
+                })
+            }
+
+
         res.status(200).json(
             {
                 success: true,
@@ -117,46 +117,39 @@ export const updateAppointment = async (req: Request, res: Response) => {
     try {
 
         const appointmentId = req.body.appointmentId
-        const appointmentDate = req.body.appointmentDate
+        const appointmentDate = (req.body.appointmentDate) as Date
         const userId = req.tokenData.userId
         const serviceId = req.body.serviceId
-        console.log(userId)
-        console.log(appointmentId)
-        console.log(serviceId)
-
-        const selectedAppointment = await Appointment.findOne({where: {id: appointmentId},
-        select: {
-            appointmentDate: true,
-            service: serviceId,
-        }})
-
-        if(!appointmentId) {
-            res.status(400).json({
+        
+   
+        const selectedAppointment = await Appointment.findOne({
+            where: { 
+                id: appointmentId,
+                user: {id:userId} 
+            },
+          }
+        )
+   
+        if (!selectedAppointment) {
+            return res.status(400).json({
                 success: false,
                 message: "This appointment doensnt exists"
-            }) 
+            })
         }
         if (!appointmentDate) {
-            res.status(400).json({
+            return res.status(400).json({
                 success: false,
                 message: "New date is needed"
             })
         }
-        if (req.tokenData.userId !== userId) {
-            return res.status(400).json({
-                success: false,
-                message: "not allowed"
-            })
-        }
-        console.log(selectedAppointment)
         
         const newAppointmentDate = Appointment.update(
-            { user: { id: userId } },
+            { id: appointmentId },
             {
                 appointmentDate: appointmentDate,
                 service: {
-                    id: serviceId
-                }  
+                    id: serviceId 
+                }
             }
         )
 

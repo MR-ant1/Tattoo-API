@@ -19,7 +19,7 @@ app.put('/api/roles/:id', updateRoles)
 app.delete('/api/roles/:id', deleteRoles)
 
 //user routes
-app.get('/api/users', auth, getUsers)
+app.get('/api/users', auth, isSuperAdmin, getUsers)
 app.get("/api/users/profile", auth, getProfile)
 app.put("/api/users/profile", auth, updateProfile)
 app.get("/api/users/:id", auth, isSuperAdmin, getUserById)
