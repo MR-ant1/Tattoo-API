@@ -4,14 +4,31 @@ import { profile } from "console";
 
 export const getUsers = async (req: Request, res: Response) => {
     try {
+        const limit= Number(req.query.limit) || 10
+        const page = Number(req.query.page) || 1
+        const skip = (page -1)*limit as number
+
+
+        if (limit > 25) {
+            res.status(401).json ({
+                success: false,
+                message: "you exceed the users limit"
+            })
+        }
+
         const users = await User.find(
+        
+            
+        
             {
                 select: {
                     id: true,
                     firstName: true,
                     lastName: true,
                     email: true
-                }
+                },
+                take: limit,
+                skip: skip 
             }
         )
         if (!users) {
@@ -73,6 +90,7 @@ export const getProfile = async (req: Request, res: Response) => {
         }
         const user = await User.findOneBy(
             { id: (userId) }
+            
 
         )
         res.status(200).json({
@@ -95,20 +113,19 @@ export const updateProfile = async (req:Request, res: Response) => {
            const firstName = req.body.firstName
            const lastName = req.body.lastName
            const email = req.body.email
-           const password = req.body.password
+           
    
-           if (!firstName || !lastName || !email || !password){
+           if (!firstName || !lastName || !email){
                res.status(400).json ({
                    success: false,
-                   message:"Name, email and password are needed"
+                   message:"first Name, lastName and email are needed"
                })
            }
            const userUpdated = User.update (
               {id: userId},
               { firstName: firstName,
                 lastName: lastName,
-                email: email,
-                password: password,
+                email: email
                 } 
            )
        res.status(200).json({

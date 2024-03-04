@@ -23,6 +23,6 @@ export class User extends BaseEntity {
     @JoinColumn({ name: 'role_id' })
     role!: Role
 
-    @OneToMany(() => Appointment, (appointments) => appointments.users)
+    @OneToMany(() => Appointment, (appointments) => appointments.user)
     appointments!: Appointment
 }

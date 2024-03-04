@@ -16,7 +16,7 @@ export class Appointments1708980851262 implements MigrationInterface {
                     },
                     {
                         name: "appointment_date",
-                        type: "date"
+                        type: "datetime"
                     },
                     {
                         name: "user_id",

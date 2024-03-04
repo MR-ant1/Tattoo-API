@@ -1,20 +1,24 @@
 import { Request, Response } from "express";
 import { Appointment } from "../models/Appointment";
+import { User } from "../models/User";
 
 export const getMyAppointments = async (req: Request, res: Response) => {
     try {
 
         const userId = req.tokenData.userId
 
-        const myAppointments = await Appointment.find({
-            select: {
+        const myAppointments = await Appointment.find(
+            {
+              where :{
+                user: {id: userId}
+              },
+              
+              select: {
                 id: true,
                 appointmentDate: true,
-                
-                
+              }
             }
-        }
-        )
+          )
 
         res.status(200).json(
             {
@@ -38,24 +42,28 @@ export const getAnAppointment = async (req: Request, res: Response) => {
 
         const userId = req.tokenData.userId
         const AppointmentId = req.params.id
+        
 
-        const appointment = await Appointment.findOneBy({id:parseInt(AppointmentId)})
-            
-
-        if (!appointment) {
+        const myAppointment = await Appointment.findOne({ where: {id: parseInt(AppointmentId)}})
+        
+        if (req.tokenData.userId !== userId)
+        
+        if (!myAppointment) {
             return res.status(401).json({
                 success: false,
-                message:"there no appointment"
+                message: "there no appointment"
             })
         }
-
+      
+       
         res.status(200).json(
             {
                 success: true,
                 message: 'Appointment retrieved succesfully',
-                data: appointment
+                data: myAppointment
             }
         )
+
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -88,7 +96,7 @@ export const createAppointments = async (req: Request, res: Response) => {
         const newAppointmentDate = await Appointment.create({
             appointmentDate: appointmentDate,
             service: { id: parseInt(serviceId) },
-            users: { id: userId }
+            user: { id: userId }
         }).save()
 
         res.status(200).json(
@@ -111,26 +119,51 @@ export const updateAppointment = async (req: Request, res: Response) => {
         const appointmentId = req.body.appointmentId
         const appointmentDate = req.body.appointmentDate
         const userId = req.tokenData.userId
+        const serviceId = req.body.serviceId
+        console.log(userId)
+        console.log(appointmentId)
+        console.log(serviceId)
 
+        const selectedAppointment = await Appointment.findOne({where: {id: appointmentId},
+        select: {
+            appointmentDate: true,
+            service: serviceId,
+        }})
 
+        if(!appointmentId) {
+            res.status(400).json({
+                success: false,
+                message: "This appointment doensnt exists"
+            }) 
+        }
         if (!appointmentDate) {
             res.status(400).json({
                 success: false,
-                message: "any date is needed"
+                message: "New date is needed"
             })
         }
-        const newDate = Appointment.update(
-            { users: { id: userId } },
+        if (req.tokenData.userId !== userId) {
+            return res.status(400).json({
+                success: false,
+                message: "not allowed"
+            })
+        }
+        console.log(selectedAppointment)
+        
+        const newAppointmentDate = Appointment.update(
+            { user: { id: userId } },
             {
-                id: appointmentId,
-                appointmentDate: appointmentDate
+                appointmentDate: appointmentDate,
+                service: {
+                    id: serviceId
+                }  
             }
         )
 
         res.status(200).json({
             success: true,
             message: "appointment updated",
-            data: newDate
+            data: newAppointmentDate
         })
     } catch (error) {
         res.status(500).json({
