@@ -46,7 +46,7 @@ Seguir los pasos descritos a continuación para preparar todo el entorno de la A
 
 -1. Clonar repositorio con el comando "git clone https://github.com/MR-ant1/Tattoo-API.git"
 -2. Abrir terminal y ejecutar el comando npm install.
--3. Crear archivo ".env". Usar el sample incluido con las referencias necesarias para establecer un servidor y conectar con la base de datos.
+-3. Crear archivo ".env". Usar el sample incluido con las referencias necesarias para introducir nuestros datos de contenedor y poder levantar el servidor.
 -4. Crear base de datos con el nombre igual al establecido en el archivo ".env"
 -5 Ejecutar migraciones mediante el comando abreviado en el package json "npm run migrations-run"
 -6. Ejecutamos los seeders mediante el comando guardado "npm run seed"
@@ -58,8 +58,99 @@ Seguir los pasos descritos a continuación para preparar todo el entorno de la A
 
 ### DISEÑO DE LA BASE DE DATOS :computer:
 
+En primer lugar, se llevó a cabo la creación de una variable "app" que relacionaremos con express para posibilitar el funcionamiento del servidor. 
+```
+export const app: Application = express();
 
+app.use(express.json());
+```
+Esta variable es definida y puesta en marcha justo debajo. Lo siguiente fue crear el archivo db.ts, donde definimos appDataSource, que contiene todos los datos asociados a nuestra base de datos y sus relaciones con migraciones y modelos
+```
+export const AppDataSource = new DataSource({
+    type: "mysql",
+    host: process.env.DB_HOST || "localhost",
+    port: Number(process.env.DB_PORT) || 3306,
+    username: process.env.DB_USER || "root",
+    password: process.env.DB_PASSWORD || "",
+    database: process.env.DB_DATABASE || "test",
+    entities: [Role, User, Service, Appointment],
+    migrations: [Roles1708976565121, Users1708977244413, Services1708980299717, Appointments1708980851262],
+    synchronize: false,
+    logging: false,
+})
+```
+Como se puede ver viene preparado para funcionar sin tener que cambiarle ningun dato, ya que cuenta con el vínculo con ".env" y, en caso contrario, cuenta con unos parametros por defecto igualmente validos.
 
+Desde aquí, se pasó a la elaboración de la función para levantar el servidor.
+![alt text](img/ServidorScreenshot.png)
+Aquí podemos ver como, importando la dependencia "dotenv", app-express y appDataSource mencionado arriba, ya pudimos definir la variable startServer, en la que inicializamos la base de datos. 
+Justo despues, la aplicación de express deja en "escucha" al servidor, por lo que ya puede empezar a procesar ordenes. Abajo ya fuera de función, invocamos startServer para poder iniciar base de datos y servidor unicamente ejecutando la ruta de este "server.ts" Se añade nodemon a este comando para arrancar, de tal manera que éste le permitirá reiniciarse cada vez que se realice un guardado.
+
+MIGRACIONES
+A continuación se ejemplifica uno de los cuatro archivos que contienen las migraciones:
+![alt text](img/MigrationServices.png)
+En el resto de casos, la estructura es exactamente similar a esta. Se exportó esta función que contiene el nombre de tabla y cada una de las columnas definidas para esta tabla servicios.
+Estos documentos serán los que tomará como referencia nuestro mysql para elaborar las tablas de datos. Aqui decidiremos el tipo de dato que cada columna contendrá, y algunas propiedades de ser necesario para estas columnas como el no poder estar vacía, o su tamaño entre otras.
+Además, indicaremos que columnas, si las hay, son foreign keys y van a tener relación con otras tablas, como se indica debajo:
+```
+   foreignKeys: [
+                    {
+                        columnNames: ["user_id"],
+                        referencedTableName: "users",
+                        referencedColumnNames: ["id"],
+                        onDelete: "CASCADE"
+                    },
+
+                    {
+                        columnNames: ["service_id"],
+                        referencedTableName: "services",
+                        referencedColumnNames: ["id"],
+                        onDelete: "CASCADE"
+                    }]
+```
+(columna "user_id", que viene referenciada de la tabla users y apunta a la columna id. el "ON CASCADE" evita que podamos manipular tablas que guarden relación con esta foreign key aunque ésta no pertenezca como tal. Lo mismo con service_id justo debajo)
+
+Después de establecer las migraciones, el siguiente paso es crear los modelos o entidades que conectan estas tablas con los controllers y endpoints que después definiremos.
+A continuación encontramos el modelo de usuarios que rige todas las interacciones que esta tendrá después con las demás tablas. Definimos el nombre de la tabla junto a entity, para posteriormente ir incluyendo las columnas id como primary key (la que enlazará con otras tablas) y las demas columnas secundarias. 
+
+Las dos últimas que se aprecian, son de los dos tipos de relación utilizados en este proyecto, onetoMany y ManyToOne, al ser role_id una foreign_key de roles, una tabla mas fuerte que Users.
+En caso contrario, tenemos appointments al ser Users mas fuerte y haber una columna "user_id" en appointments
+
+![alt text](img/UserModel.png)
+
+Tanto migraciones como Entidades o modelos, deben ser referenciados en nuestro AppDataSOurce para que éste cree el vínculo que nos permita llevar a cabo el siguiente paso. Muestro captura del mismo archivo donde se encontraban nuestro AppDataSource, pero ahora con todas las migraciones y modelos tanto importados al archivo, como introducidos en su apartado de AppDataSource.
+![alt text](img/databaseSourceData.png)
+
+  ENDPOINTS
+
+- Registration: 
+![alt text](img/RegistrationCOntroller.png)
+No se muestra toda la función del controlador, pero en una primera parte, importamos Request y Response de express junto al modelo de User y definimos la función en la que pediremos los datos del nuevo usuario por el body. 
+Una vez introducidos, se llevan acabo validaciones sobre el formato y el tamaño de los datos y se trata la contraseña para encriptarla mediante bcrypt. Este endpoint sustituye en si mismo a la función de crear usuarios que a priori se pensaba incluir en "userControler"
+
+- Login:
+ ![alt text](img/LoginAuth.png) 
+ Con login volvemos a saltar la primera parte. Se aprecia arriba de la imagen como se define la función usando request y response, después se piden tanto email como contraseña por body y, tras dos validaciones, se pasa a la parte que se ilustra.
+
+ Se hace una búsqueda de un solo usuario que tenga ese mismo email (no puede haber dos usuarios con un mismo email), y se obtienen sus datos mediante select. 
+ ![alt text](img/LoginJwt.png)
+ Tras esto, se hace una comparación mediante bcrypt con la contraseña almacenada (este se encarga de desencriptarla) y por último, se lleva a cabo la creación de un token temporal para ese usuario con jwt, importado arriba del documento. Le indicamos aqui que contendrá tanto el user_id como el rol del usuario loggeado.Y en el archivo aparte "types>index",
+ ```
+export interface TokenData {
+    userId: number;
+    roleName: string;
+};
+
+declare global {
+    // Express
+    namespace Express {
+        export interface Request {
+            tokenData: TokenData;
+        }
+    }
+}
+ ```
+damos formato a la función de token creada en el login.
 ### AUTHOR :pencil2:
 - Antonio Rodrigo - Full Stack Developer student
 

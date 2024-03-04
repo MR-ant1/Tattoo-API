@@ -75,7 +75,7 @@ export const login = async (req: Request, res: Response) => {
             )
         }
                 //   |  DE MANERA TEMPORAL SE INCLUYE ANY AL NO PODER DELCARARSE USER EN LA VERIFICACION DE CONTRASEÑA
-        const user: any = await User.findOne(
+        const user = await User.findOne(
             {
                 where: {
                     email: email
@@ -102,7 +102,7 @@ export const login = async (req: Request, res: Response) => {
             })
         }
 
-        const isValidPassword = bcrypt.compareSync(password, user.password)
+        const isValidPassword = bcrypt.compareSync(password, user!.password)
 
         if (!isValidPassword) {
             return res.status(400).json({
@@ -113,8 +113,8 @@ export const login = async (req: Request, res: Response) => {
 
         const token = jwt.sign(
             {
-                userId: user.id,
-                roleName: user.role.name
+                userId: user!.id,
+                roleName: user!.role.name
             },
             process.env.JWT_SECRET as string,
             {
