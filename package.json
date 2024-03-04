@@ -8,6 +8,7 @@
     "dev": "nodemon ./src/server.ts",
     "migration-run": "typeorm-ts-node-commonjs migration:run -d ./src/database/db.ts",
     "migration-revert": "typeorm-ts-node-commonjs migration:revert -d ./src/database/db.ts",
+    "seed": "ts-node ./src/database/seeders/seeder.ts",
     "build": "tsc",
     "start": "node ./dist/server.js"
   },
@@ -15,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.6",

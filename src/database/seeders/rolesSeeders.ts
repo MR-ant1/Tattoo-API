@@ -1,7 +1,7 @@
 import { AppDataSource } from "../db"
 import { Role } from "../../models/Role";
 
-const roleSeedDataBase = async () => {
+export const roleSeedDataBase = async () => {
     try {
         await AppDataSource.initialize();
 
@@ -23,7 +23,6 @@ const roleSeedDataBase = async () => {
     finally  {await AppDataSource.destroy()}
 }
 
-roleSeedDataBase()
 
 
 

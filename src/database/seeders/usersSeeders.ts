@@ -1,29 +1,34 @@
 import bcrypt from "bcrypt"
-
+import {faker} from "@faker-js/faker"
 import { AppDataSource } from "../db"
 import { User } from "../../models/User";
 import { Role } from "../../models/Role";
 
-const userSeedDataBase = async () => {
+
+const generateFakeUser = () => {
+    const userFaker = new User();
+    userFaker.firstName = faker.person.firstName();
+    userFaker.lastName = faker.person.lastName();
+    userFaker.email = faker.internet.email();
+    userFaker.password = bcrypt.hashSync("useruser", 5);
+    const role = new Role()
+    userFaker.role.id = 1
+    return userFaker;
+}
+
+export const userSeedDataBase = async () => {
     try {
         await AppDataSource.initialize();
-
-            const userUser = new User()
-            userUser.firstName = "user"
-            userUser.lastName = "user"
-            userUser.email = "user@user.com"
-            userUser.password = bcrypt.hashSync("useruser", 5)
-            userUser.role = new Role()
-            userUser.role.id = 1
              
-        
             const userAdmin = new User()
             userAdmin.firstName = "admin"
-            userAdmin.lastName = "admin"
+            userAdmin.lastName = "user"
             userAdmin.email = "admin@admin.com"
             userAdmin.password = bcrypt.hashSync("useruser", 5)
             userAdmin.role = new Role()
             userAdmin.role.id = 2
+
+            await userAdmin.save()
             
             const userSuperAdmin = new User()
             userSuperAdmin.firstName = "super_admin"
@@ -33,24 +38,15 @@ const userSeedDataBase = async () => {
             userSuperAdmin.role = new Role()
             userSuperAdmin.role.id = 3
 
-            await userAdmin.save()
+            await userSuperAdmin.save()
 
-            const userLastName = new User()
-            userLastName.lastName = "martinez"
-            await userLastName.save()
-
-            const userEmail = new User()
-            userEmail.email = "email"
-            await userEmail.save()
-
-            const userPassword = new User()
-            userPassword.password = "password"
-            await userPassword.save()
-        
+            
+            const fakeUsers = Array.from({ length: 50 }, generateFakeUser);
+            
+            await User.save(fakeUsers);
+    
     } catch (error) {
        console.log(error)
     }
     finally  {await AppDataSource.destroy()}
 }
-
-userSeedDataBase()
