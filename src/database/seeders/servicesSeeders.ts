@@ -22,7 +22,7 @@ export const serviceSeedDataBase = async () => {
 
             const servicePiercing = new Service()
             servicePiercing .serviceName = "Colocación de piercings y dilatadores"
-            serviceCustomTattoo.description = "Ofrecemos servicios profesionales para la colocación de piercings y dilatadores. Nuestro equipo garantiza procedimientos seguros y estilos variados para satisfacer las preferencias individuales de nuestros clientes."
+            servicePiercing.description = "Ofrecemos servicios profesionales para la colocación de piercings y dilatadores. Nuestro equipo garantiza procedimientos seguros y estilos variados para satisfacer las preferencias individuales de nuestros clientes."
             await servicePiercing.save()
 
             const serviceSales = new Service()

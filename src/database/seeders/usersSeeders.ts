@@ -11,7 +11,7 @@ const generateFakeUser = () => {
     userFaker.lastName = faker.person.lastName();
     userFaker.email = faker.internet.email();
     userFaker.password = bcrypt.hashSync("useruser", 5);
-    const role = new Role()
+    userFaker.role = new Role()
     userFaker.role.id = 1
     return userFaker;
 }
@@ -42,7 +42,6 @@ export const userSeedDataBase = async () => {
 
             
             const fakeUsers = Array.from({ length: 50 }, generateFakeUser);
-            
             await User.save(fakeUsers);
     
     } catch (error) {

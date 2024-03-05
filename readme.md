@@ -151,6 +151,16 @@ declare global {
 }
  ```
 damos formato a la función de token creada en el login.
+Este token será el que se use a partir de ahora para autentificar a cualqier usuario como perteneciente a la base de datos.
+-Auth Endpoints:
+-Roles Endpoints:
+-Users Endpoints:
+-Service Endpoint:
+-Appointments Endpoints
+![alt text](img/CreateRoles.png)
+
+USER ENDPOINTS
+- Get users: este endpoint nos traerá a todos los usuarios
 ### AUTHOR :pencil2:
 - Antonio Rodrigo - Full Stack Developer student
 
