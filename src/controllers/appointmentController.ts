@@ -166,18 +166,3 @@ export const updateAppointment = async (req: Request, res: Response) => {
         })
     }
 }
-export const deleteAppointments = (req: Request, res: Response) => {
-    try {
-        res.status(200).json(
-            {
-                success: true,
-                message: 'appointment deleted succesfully'
-            }
-        )
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Couldnt delete appointment"
-        })
-    }
-}

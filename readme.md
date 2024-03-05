@@ -317,4 +317,4 @@ Muchísimas gracias como siempre al equipo de GeeksHubs Achademy por brindarme e
 
 [def]: #Agradecimientos-
 
-:arrow_up: [Table-of-contents](#table-of-contents-open_file_folder)
+:arrow_up: [INDICE](#INDICE-open_file_folder)
