@@ -44,15 +44,58 @@ https://github.com/MR-ant1/Tattoo-API.git
 
 Seguir los pasos descritos a continuación para preparar todo el entorno de la API:
 
--1. Clonar repositorio con el comando "git clone https://github.com/MR-ant1/Tattoo-API.git"
--2. Abrir terminal y ejecutar el comando npm install.
--3. Crear archivo ".env". Usar el sample incluido con las referencias necesarias para introducir nuestros datos de contenedor y poder levantar el servidor.
--4. Crear base de datos con el nombre igual al establecido en el archivo ".env"
--5 Ejecutar migraciones mediante el comando abreviado en el package json "npm run migrations-run"
--6. Ejecutamos los seeders mediante el comando guardado "npm run seed"
--7. Levantamos servidor mediante el comando "npm run dev"
--8. Dirigirnos a nuestro client (thunderClient, insomnia, postman...) e importar el archivo de colecciones que incluye esta repositorio.
--9. Ya puedes probar las diferentes funciones del proyecto! mas abajo encontrarás toda la info sobre su funcionamiento.
+-1. Instalar Visual Studio Code, docker, algún cliente  y mysql workbrench en nuestro equipo. aqui dejo enlaces de descarga de docker y workbrench y un enlace a Postman, un ejemplo de cliente(también podemos añadir "Thunder Client desde las extensiones de visual studio code RECOMENDADO):
+- <a href=https://www.docker.com/products/docker-desktop/ >Docker Desktop </a>
+- <a href=https://downloads.mysql.com/archives/workbench/ > Mysql workbrench</a>
+- <a href=https://www.postman.com/downloads/ > Postman</a>
+- <a href=https://code.visualstudio.com/ > Visual studio Code</a>
+-2. Abrimos windows powerShell e introducimos el siguiente comando para descargar la imagen de Mysql:
+```hash 
+docker pull mysql
+```
+seguido de este otro comando para establecer un contenedor con esa imagen. Detras de name, daremos el nombre que queramos al contenedor, despues de -p, estableceremos los puertos que usaremos (siendo el de la derecha el de nuestro equipo) y en ROOT y 1234, introduciremos nuestro usuario y contraseña para este contenedor.
+``` hash
+docker run --name mysql-container -p 3307:3306 -e MYSQL_ROOT_PASSWORD=1234 -d mysql
+```
+
+-3. Crearemos una carpeta para el proyecto, la abriremos y ejecutaremos en consola el comando: 
+``` hash
+git: init
+```
+Una vez lo hayamos hecho, Clonaremos el repositorio con el comando "git clone https://github.com/MR-ant1/Tattoo-API.git"
+-4. Abrir terminal y ejecutar en orden de aparición, los siguientes comandos:
+``` bash
+npm init --y
+```
+``` bash
+npm install
+```
+-5. Crear archivo ".env". Usar el sample incluido con las referencias necesarias para introducir nuestros datos de contenedor y poder levantar el servidor. Dejo un ejemplo de configuración:
+``` bash
+PORT=4001
+
+DB_USER=rooT
+DB_PASSWORD=1234
+DB_PORT=3306
+DB_HOST=localhost
+DB_DATABASE=TATTOO
+
+JWT_SECRET=SECRETO
+```
+-6. Crear base de datos en workbrench con el nombre igual al establecido en el archivo ".env" e importar la colección de endpoints a nuestro client. Esta se encuentra guardada en la carpeta HTTP
+-7. Ejecutar migraciones mediante el comando:
+``` bash
+typeorm-ts-node-commonjs migration:run -d ./src/database/db.ts
+```
+Ésto enviará a nuestra base de datos el formato de nuestras tablas y sus relaciones
+-8. Ejecutamos los seeders mediante el comando:
+``` bash
+ts-node ./src/database/seeders/seeder.ts
+```
+Con este comando añadiremos la información con los registros a nuestro mysql
+-9. Levantamos servidor mediante el comando "npm run dev"
+-10. Dirigirnos a nuestro client (thunderClient, insomnia, postman...) e importar el archivo de colecciones que incluye esta repositorio.
+-11. Ya puedes probar las diferentes funciones del proyecto! mas abajo encontrarás toda la info sobre su funcionamiento.
 
 
 
@@ -121,18 +164,33 @@ En caso contrario, tenemos appointments al ser Users mas fuerte y haber una colu
 Tanto migraciones como Entidades o modelos, deben ser referenciados en nuestro AppDataSOurce para que éste cree el vínculo que nos permita llevar a cabo el siguiente paso. Muestro captura del mismo archivo donde se encontraban nuestro AppDataSource, pero ahora con todas las migraciones y modelos tanto importados al archivo, como introducidos en su apartado de AppDataSource.
 ![alt text](img/databaseSourceData.png)
 
-  ENDPOINTS
-
+  
+<details>
+<summary>ENDPOINTS</summary>
 - Registration: 
 ![alt text](img/RegistrationCOntroller.png)
 No se muestra toda la función del controlador, pero en una primera parte, importamos Request y Response de express junto al modelo de User y definimos la función en la que pediremos los datos del nuevo usuario por el body. 
 Una vez introducidos, se llevan acabo validaciones sobre el formato y el tamaño de los datos y se trata la contraseña para encriptarla mediante bcrypt. Este endpoint sustituye en si mismo a la función de crear usuarios que a priori se pensaba incluir en "userControler"
+Para llevar a cabo este endpoint, iremos anuestro client y mediante el metodo POST, añadiremos la ruta asociada al registro:
+localhost:PORT/api/auth/register.
+Donde localhost se usa al ejecutarse en local, y PORT representa el puerto introducido en el archivo .env que ocupa la base de datos.
+Si importamos la colección que adjunto en la carpeta HTTP, deberían venir todo preparado y solo hará falta cambiar el puerto de ser distinto al que ahi vendrá.
+Tras esto, iremos a la pestaña "Body", en introduciremos en el cuadro inferior de texto las 4 columnas a crear del usuario con sus valores donde aparecen las "x" tal y como vienen escritas aqui respetando comillas:
+``` bash
+{
+  "firstName": "xxxxx",
+  "lastName": "xxxxxxx",
+  "email": "xxxxxxxxx",
+  "password": "xxxxxx"
+}
+```
 
 - Login:
  ![alt text](img/LoginAuth.png) 
  Con login volvemos a saltar la primera parte. Se aprecia arriba de la imagen como se define la función usando request y response, después se piden tanto email como contraseña por body y, tras dos validaciones, se pasa a la parte que se ilustra.
 
  Se hace una búsqueda de un solo usuario que tenga ese mismo email (no puede haber dos usuarios con un mismo email), y se obtienen sus datos mediante select. 
+ 
  ![alt text](img/LoginJwt.png)
  Tras esto, se hace una comparación mediante bcrypt con la contraseña almacenada (este se encarga de desencriptarla) y por último, se lleva a cabo la creación de un token temporal para ese usuario con jwt, importado arriba del documento. Le indicamos aqui que contendrá tanto el user_id como el rol del usuario loggeado.Y en el archivo aparte "types>index",
  ```
@@ -151,16 +209,31 @@ declare global {
 }
  ```
 damos formato a la función de token creada en el login.
-Este token será el que se use a partir de ahora para autentificar a cualqier usuario como perteneciente a la base de datos.
--Auth Endpoints:
--Roles Endpoints:
+Este token será el que se use a partir de ahora para autentificar a cualquier usuario como perteneciente a la base de datos.
+Para hacer funcionar esta endpoint, debemos de nuevo acudir al body de nuestro client, y con mediante el metodo post y la ruta:
+- localhost:PORT/api/auth/login
+ client, y consultar algun correo de algún usuario randomizado, aunque se recomienda usar el el correo con derechos de super_admin junto a la contraseña indicada(todos los usuarios randomizados y admin, tienen la misma contraseña por defecto)
+ ``` bash
+ "email": "superadmin@superadmin.com"
+ "password": "useruser"
+```
+COPIAREMOS EL NUMERO DE TOKEN QUE LA CONSOLA DEL CLIENT DEVUELVA PARA, A PARTIR DE AHORA, UTILIZARLO EN TODAS LOS ENDPOINTS INTRODUCIENDOLO EN EL APARTADO AUTH>BEARER
+- ROLES ENDPOINTS:
+    GET ROLES (super_admin): GET -> localhost:PORT/api/roles
+Obtendremos como super admins la posibilidad de consultar todos los roles disponibles para los usuarios. Por defecto: user, admin y super_admin
+
+    CREATE ROLES (super_admin): POST -> localhost:PORT/api/roles
+
+
 -Users Endpoints:
--Service Endpoint:
+-Services Endpoint:
 -Appointments Endpoints
 ![alt text](img/CreateRoles.png)
 
 USER ENDPOINTS
 - Get users: este endpoint nos traerá a todos los usuarios
+
+</details>
 ### AUTHOR :pencil2:
 - Antonio Rodrigo - Full Stack Developer student
 
