@@ -3,18 +3,18 @@
 ### OBJETIVO :dart:
 Este proyecto tiene como fin recrear el backend de una API con varias tablas de registros y relaciones de uno a muchos y viceversa entre ellas.
 
-### TABLE OF CONTENTS :open_file_folder: 
+### INDICE :open_file_folder: 
 - [API TATTOO WEB](#api-tattoo-web)
     - [OBJETIVO :dart:](#objetivo-dart)
-    - [TABLE OF CONTENTS :open\_file\_folder:](#table-of-contents-open_file_folder)
+    - [INDICE :open\_file\_folder:](#indice-open_file_folder)
     - [STACK :wrench:](#stack-wrench)
     - [SOBRE LA API :blue\_book:](#sobre-la-api-blue_book)
     - [DIAGRAMA BD :clipboard:](#diagrama-bd-clipboard)
-    - [HOW TO TRY AND VISUALIZE IT :mag:](#how-to-try-and-visualize-it-mag)
+    - [COMO DESCARGARLO Y PROBARLO :mag:](#como-descargarlo-y-probarlo-mag)
     - [DISEÑO DE LA BASE DE DATOS :computer:](#diseño-de-la-base-de-datos-computer)
     - [AUTOR :pencil2:](#autor-pencil2)
-    - [POTENTIAL IMPROVEMENTS :heavy\_check\_mark:](#potential-improvements-heavy_check_mark)
-    - [ACKNOWLEDGMENTS :raised\_hands:](#acknowledgments-raised_hands)
+    - [POSIBLES MEJORAS :heavy\_check\_mark:](#posibles-mejoras-heavy_check_mark)
+    - [AGRADECIMIENTOS :raised\_hands:](#agradecimientos-raised_hands)
 
 ### STACK :wrench:
 <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /><img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" alt="HTML5" /><img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="CSS" /><img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge" alt="CSS"/><img src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white" alt="CSS" />
@@ -37,7 +37,7 @@ Esta API permite crear un usuario con el que reservar citas para tatuajes o comp
 
 ### DIAGRAMA BD :clipboard:
 ![alt text](img/db_migrations.png)
-### HOW TO TRY AND VISUALIZE IT :mag: 
+### COMO DESCARGARLO Y PROBARLO :mag: 
 
 Aquí se encuentra enlace al repositorio del proyecto:
 https://github.com/MR-ant1/Tattoo-API.git
@@ -299,24 +299,22 @@ Mediante la identificación por token, el sistema creará una nueva cita para el
 Actualizar la hora o servicio seleccionado de una cita concreta. Introduciremos en el body los campos "id", "appointmentDate" y "serviceId" como en anteriores endpoints con sus nuevos valores.
 
 </details>
-
-
-
 </details>
-### AUTOR :pencil2:
+
+###  AUTOR :pencil2:
 - Antonio Rodrigo - Full Stack Developer student
 
 - <a href="https://github.com/MR-ant1">GitHub - <a>Linkedin</a>
 
-### POTENTIAL IMPROVEMENTS :heavy_check_mark: 
+### POSIBLES MEJORAS :heavy_check_mark: 
 
 -En el futuro se podrían implementar mas funciones como borrar usuarios, roles o citas.
 -Podría mejorarse algún endpoint añadiendole mas información a devolver para mejorar la accesibilidad y manejo del programa.
 
-### ACKNOWLEDGMENTS :raised_hands:
+### AGRADECIMIENTOS :raised_hands:
 
 Muchísimas gracias como siempre al equipo de GeeksHubs Achademy por brindarme esta posibilidad de desarrollarme en el mundo y a todos mis compañeros que siempre están ahi para echar una mano cuando hace falta!
 
-[def]: #Acknowledgments-
+[def]: #Agradecimientos-
 
 :arrow_up: [Table-of-contents](#table-of-contents-open_file_folder)
