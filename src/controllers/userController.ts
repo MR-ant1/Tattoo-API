@@ -140,20 +140,3 @@ export const updateProfile = async (req:Request, res: Response) => {
            error: error
        })
    }}
-export const deleteUsers = (req: Request, res: Response) => {
-    try {
-        req.params.id
-        res.status(200).json(
-            {
-                success: true,
-                message: "User deleted succesfully"
-            }
-        )
-    } catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Couldnt delete User",
-            error: error
-        })
-    }
-}

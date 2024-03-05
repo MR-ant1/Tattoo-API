@@ -1,18 +1,18 @@
 # API TATTOO WEB
 
-### OBJETIVO
+### OBJETIVO :dart:
 Este proyecto tiene como fin recrear el backend de una API con varias tablas de registros y relaciones de uno a muchos y viceversa entre ellas.
 
 ### TABLE OF CONTENTS :open_file_folder: 
 - [API TATTOO WEB](#api-tattoo-web)
-    - [OBJETIVO](#objetivo)
+    - [OBJETIVO :dart:](#objetivo-dart)
     - [TABLE OF CONTENTS :open\_file\_folder:](#table-of-contents-open_file_folder)
     - [STACK :wrench:](#stack-wrench)
-    - [SOBRE LA API](#sobre-la-api)
-    - [DIAGRAMA BD](#diagrama-bd)
+    - [SOBRE LA API :blue\_book:](#sobre-la-api-blue_book)
+    - [DIAGRAMA BD :clipboard:](#diagrama-bd-clipboard)
     - [HOW TO TRY AND VISUALIZE IT :mag:](#how-to-try-and-visualize-it-mag)
     - [DISEÑO DE LA BASE DE DATOS :computer:](#diseño-de-la-base-de-datos-computer)
-    - [AUTHOR :pencil2:](#author-pencil2)
+    - [AUTOR :pencil2:](#autor-pencil2)
     - [POTENTIAL IMPROVEMENTS :heavy\_check\_mark:](#potential-improvements-heavy_check_mark)
     - [ACKNOWLEDGMENTS :raised\_hands:](#acknowledgments-raised_hands)
 
@@ -20,7 +20,7 @@ Este proyecto tiene como fin recrear el backend de una API con varias tablas de 
 <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /><img src="https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white" alt="HTML5" /><img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" alt="CSS" /><img src="https://img.shields.io/badge/Express.js-404D59?style=for-the-badge" alt="CSS"/><img src="https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white" alt="CSS" />
 <img src="https://img.shields.io/badge/DOCKER-2020BF?style=for-the-badge&logo=docker&logoColor=white" alt="CSS" />
 
-### SOBRE LA API
+### SOBRE LA API :blue_book:
 
 Esta API permite crear un usuario con el que reservar citas para tatuajes o compra de productos del mundo del tattoo. Las posibilidades que brinda a los usuarios son:
 
@@ -35,7 +35,7 @@ Esta API permite crear un usuario con el que reservar citas para tatuajes o comp
 -Creacion y consulta de roles para los usuarios (super_admin)
 -Creación de nuevos servicios para la web (super_admin)
 
-### DIAGRAMA BD
+### DIAGRAMA BD :clipboard:
 ![alt text](img/db_migrations.png)
 ### HOW TO TRY AND VISUALIZE IT :mag: 
 
@@ -43,7 +43,8 @@ Aquí se encuentra enlace al repositorio del proyecto:
 https://github.com/MR-ant1/Tattoo-API.git
 
 Seguir los pasos descritos a continuación para preparar todo el entorno de la API:
-
+<details>
+<summary>INSTRUCCIONES</summary>
 -1. Instalar Visual Studio Code, docker, algún cliente  y mysql workbrench en nuestro equipo. aqui dejo enlaces de descarga de docker y workbrench y un enlace a Postman, un ejemplo de cliente(también podemos añadir "Thunder Client desde las extensiones de visual studio code RECOMENDADO):
 - <a href=https://www.docker.com/products/docker-desktop/ >Docker Desktop </a>
 - <a href=https://downloads.mysql.com/archives/workbench/ > Mysql workbrench</a>
@@ -96,7 +97,7 @@ Con este comando añadiremos la información con los registros a nuestro mysql
 -9. Levantamos servidor mediante el comando "npm run dev"
 -10. Dirigirnos a nuestro client (thunderClient, insomnia, postman...) e importar el archivo de colecciones que incluye esta repositorio.
 -11. Ya puedes probar las diferentes funciones del proyecto! mas abajo encontrarás toda la info sobre su funcionamiento.
-
+</details>
 
 
 ### DISEÑO DE LA BASE DE DATOS :computer:
@@ -128,8 +129,9 @@ Desde aquí, se pasó a la elaboración de la función para levantar el servidor
 ![alt text](img/ServidorScreenshot.png)
 Aquí podemos ver como, importando la dependencia "dotenv", app-express y appDataSource mencionado arriba, ya pudimos definir la variable startServer, en la que inicializamos la base de datos. 
 Justo despues, la aplicación de express deja en "escucha" al servidor, por lo que ya puede empezar a procesar ordenes. Abajo ya fuera de función, invocamos startServer para poder iniciar base de datos y servidor unicamente ejecutando la ruta de este "server.ts" Se añade nodemon a este comando para arrancar, de tal manera que éste le permitirá reiniciarse cada vez que se realice un guardado.
+<details>
+<summary>MIGRACIONES</summary>
 
-MIGRACIONES
 A continuación se ejemplifica uno de los cuatro archivos que contienen las migraciones:
 ![alt text](img/MigrationServices.png)
 En el resto de casos, la estructura es exactamente similar a esta. Se exportó esta función que contiene el nombre de tabla y cada una de las columnas definidas para esta tabla servicios.
@@ -163,10 +165,27 @@ En caso contrario, tenemos appointments al ser Users mas fuerte y haber una colu
 
 Tanto migraciones como Entidades o modelos, deben ser referenciados en nuestro AppDataSOurce para que éste cree el vínculo que nos permita llevar a cabo el siguiente paso. Muestro captura del mismo archivo donde se encontraban nuestro AppDataSource, pero ahora con todas las migraciones y modelos tanto importados al archivo, como introducidos en su apartado de AppDataSource.
 ![alt text](img/databaseSourceData.png)
+</details>
+<details>
+<summary>MIDDLEWARES</summary>
 
-  
+Sirven para controlar el acceso de usuarios a distintas funciones, se crearon dos middlewares "isSuperAdmin" y "auth" encargados de dar acceso a las funciones super_admin y comprobar que el usuario ha hecho login respectivamente
+Las variables de ambos middlewares serán llamadas en las rutas de los distintos endpoints de ser necesarios para limitar o verificar al usuario que la solicite.
+
+    AUTH
+![alt text](img/AuthMiddleware.png)    
+  Se define la variable auth, que usará los parametros req y res, y además NextFunction, que regula el paso a la siguiente función.
+  Despues ya dentro de función, definimos la variable token, que comprobará si la cifra introducida es correcta eliminando mediante split las comillas que incluimos. Después utiliza el token y comprueba mediante la dependencia jwt, si el susodicho concuerda junto a la palabra secreta almacenada en .env .Si es, así da paso a la ejecución de isSuperAdmin si está presente, o a la variable del endpoint para que se ejecute.
+
+    IS_SUPER_ADMIN
+![alt text](img/isSuperAdminMiddleware.png)
+Comprueba si el rolename asociado al user_id del token, es super_admin y da acceso al endpoint limitado a dicho rol.
+</details>
+
 <details>
 <summary>ENDPOINTS</summary>
+<details>
+<summary>AUTH ENDPOINTS</summary>
 - Registration: 
 ![alt text](img/RegistrationCOntroller.png)
 No se muestra toda la función del controlador, pero en una primera parte, importamos Request y Response de express junto al modelo de User y definimos la función en la que pediremos los datos del nuevo usuario por el body. 
@@ -214,40 +233,89 @@ Para hacer funcionar esta endpoint, debemos de nuevo acudir al body de nuestro c
 - localhost:PORT/api/auth/login
  client, y consultar algun correo de algún usuario randomizado, aunque se recomienda usar el el correo con derechos de super_admin junto a la contraseña indicada(todos los usuarios randomizados y admin, tienen la misma contraseña por defecto)
  ``` bash
- "email": "superadmin@superadmin.com"
+ "email": "superadmin@superadmin.com",
  "password": "useruser"
 ```
-COPIAREMOS EL NUMERO DE TOKEN QUE LA CONSOLA DEL CLIENT DEVUELVA PARA, A PARTIR DE AHORA, UTILIZARLO EN TODAS LOS ENDPOINTS INTRODUCIENDOLO EN EL APARTADO AUTH>BEARER
-- ROLES ENDPOINTS:
+COPIAREMOS EL NUMERO DE TOKEN QUE LA CONSOLA DEL CLIENT DEVUELVA PARA, A PARTIR DE AHORA, UTILIZARLO EN NUESTRO CLIENT INTRODUCIENDOLO EN EL APARTADO AUTH>BEARER
+</details>
+<details>
+<summary>ROLES ENDPOINTS</summary>
     GET ROLES (super_admin): GET -> localhost:PORT/api/roles
 Obtendremos como super admins la posibilidad de consultar todos los roles disponibles para los usuarios. Por defecto: user, admin y super_admin
 
     CREATE ROLES (super_admin): POST -> localhost:PORT/api/roles
+    ![alt text](img/CreateRoles.png)
+Podremos crear nuevos roles para la BD(base de datos), necesitaremos introducir la columna "name" con su valor en el body como veniamos haciendo anteriormente mas el token que guardamos al loggear
+</details>
+<details>
+<summary>USER ENDPOINTS</summary>
+    GET USERS (super_admin): GET -> localhost:4001/api/users?limit=2&page=2
+Este endpoint nos traerá a todos los usuarios. La ruta varía respecto a los demas dado que en este hemos añadido un limitador de usuarios por página a mostrar para evitar largas listas en casos de muchos registros. Se pueden manipular las cifras tras limit y page para modificar el numero de registros por pagina y la pagina en la que situarse. Puede quitarse la elección de pagina
 
+     GET USERS BY ID (super_admin): GET -> localhost:PORT/api/users/id
+Podremos obtener los datos de un usuario concreto. Pondremos el numero de de id del usuario en lugar del "id" de la ruta para indicar cual buscamos.
+     CREATE USERS (super_admin): POST -> localhost:PORT/api/users
+Añadir nuevos usuarios a la BD. Tendremos que introducir en el body de nuestro client, los siguientes registros con nuestra elección para cada uno. tambien el token en auth>bearer, como en todos los endpoints salvo login y register:
+``` bash
+{
+    "firstName": "xxxxxxx",
+    "lastName": "xxxxxxxx",
+    "email": "xxxxxx@xxx.xxx",
+    "password": "xxxxxxx"
+}
+```
+    GET PROFILE: GET -> localhost:PORT/api/users/profile
+Obtener los datos de la propia cuenta logueada. Utilizará el token asignado para identificar al dueño de la petición.
 
--Users Endpoints:
--Services Endpoint:
--Appointments Endpoints
-![alt text](img/CreateRoles.png)
-
-USER ENDPOINTS
-- Get users: este endpoint nos traerá a todos los usuarios
+    UPDATE PROFILE: PUT -> localhost:PORT/api/users/profile
+    ![alt text](img/UpdateProfileController.png)
+De nuevo, mediante la identificación por token, obtendremos el usuario que realiza petición y, mediante body, le introduciremos los registros y valores nuevos para nuestro usuario. Los introduciremos de la misma forma que explicamos en Register y en CREATE USERS.
 
 </details>
-### AUTHOR :pencil2:
+<details>
+<summary>SERVICES ENDPOINTS</summary>
+    
+    GET SERVICES (open): GET localhost:PORT/api/services
+Este es el único endpoint abierto a todo usuario incluso sin registro. Mostrará los ervicios disponibles en el negocio. No precisa de token al no tener que autentificar
+    
+    CREATE SERVICES (super_admin): POST localhost:PORT/api/services
+Podremos crear nuevos servicios para mostrar a lo usuarios.
+![alt text](img/CreateServiceController.png)
+</details>
+<details>
+<summary>APPOINTMENTS ENDPOINTS</summary>
+
+    GET MY APPOINTMENTS: GET localhost:PORT/api/appointments
+Mediante la identificación por token, el sistema mostrará todas las citas asocidas al usuario que lo solicita.
+    ![alt text](img/myAppointmentsController.png)
+
+    GET AN APPOINTMENT: GET localhost:PORT/api/appointments/id
+Buscar una cita concreta mediante su número de id al final de la ruta superior (sustituyendo a "id")
+   
+    CREATE APPOINTMENTS: POST localhost:PORT/api/appointments
+Mediante la identificación por token, el sistema creará una nueva cita para el usuario. Solo necesitara que introduzcamos por body del client los campos "appointmentDate" y "serviceId" como veniamos haciendo, para seleccionar la fecha y hora y el servicio que consumiremos. IMPORTANTE. introducir la fecha en formato YYYY-MM_DD HH-MM-SS
+   
+    UPDATE APPOINTMENT: PUT localhost:PORT/api/appointments
+Actualizar la hora o servicio seleccionado de una cita concreta. Introduciremos en el body los campos "id", "appointmentDate" y "serviceId" como en anteriores endpoints con sus nuevos valores.
+
+</details>
+
+
+
+</details>
+### AUTOR :pencil2:
 - Antonio Rodrigo - Full Stack Developer student
 
 - <a href="https://github.com/MR-ant1">GitHub - <a>Linkedin</a>
 
 ### POTENTIAL IMPROVEMENTS :heavy_check_mark: 
 
-
+-En el futuro se podrían implementar mas funciones como borrar usuarios, roles o citas.
+-Podría mejorarse algún endpoint añadiendole mas información a devolver para mejorar la accesibilidad y manejo del programa.
 
 ### ACKNOWLEDGMENTS :raised_hands:
 
-Big shout out to GeeksHubs for giving me the chance to learn about all this amazing world of developing
-More and better proyects are coming nearly thanks to them!
-Sorry for many possible mistakes in English but I'm training my writing skills and trying to learn technicalities from the area! :D
+Muchísimas gracias como siempre al equipo de GeeksHubs Achademy por brindarme esta posibilidad de desarrollarme en el mundo y a todos mis compañeros que siempre están ahi para echar una mano cuando hace falta!
 
 [def]: #Acknowledgments-
 
