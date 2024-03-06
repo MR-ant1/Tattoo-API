@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Appointment } from "../models/Appointment";
-import { User } from "../models/User";
+
 
 export const getMyAppointments = async (req: Request, res: Response) => {
     try {
@@ -10,12 +10,16 @@ export const getMyAppointments = async (req: Request, res: Response) => {
         const myAppointments = await Appointment.find(
             {
                 where: {
-                    user: { id: userId }
+                    user: { id: userId },
+                },
+                relations: {
+                    service: true
                 },
 
                 select: {
                     id: true,
                     appointmentDate: true,
+                    service: {serviceName:true}
                 }
             }
         )
@@ -44,7 +48,18 @@ export const getAnAppointment = async (req: Request, res: Response) => {
         const AppointmentId = req.params.id
 
 
-        const myAppointment = await Appointment.findOne({ where: { id: parseInt(AppointmentId) } })
+        const myAppointment = await Appointment.findOne({ where: { id: parseInt(AppointmentId)},
+        relations: {
+            service: true,
+            user: true
+        },
+        select: {
+            id: true,
+            appointmentDate: true,
+            service: {serviceName: true},
+            user: {firstName: true}
+        }
+        })
 
         if (req.tokenData.userId !== userId)
 
@@ -126,7 +141,7 @@ export const updateAppointment = async (req: Request, res: Response) => {
             where: { 
                 id: appointmentId,
                 user: {id:userId} 
-            },
+            }
           }
         )
    
