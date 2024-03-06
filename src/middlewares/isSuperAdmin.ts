@@ -8,6 +8,7 @@ export const isSuperAdmin = (req: Request, res: Response, next: NextFunction) =>
                 message: "You dont have authorization"
             })
         }
+        next()
     } catch (error) {
         res.status(500).json({
             success: false,
