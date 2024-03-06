@@ -24,16 +24,16 @@ Este proyecto tiene como fin recrear el backend de una API con varias tablas de 
 
 Esta API permite crear un usuario con el que reservar citas para tatuajes o compra de productos del mundo del tattoo. Las posibilidades que brinda a los usuarios son:
 
--Registro de un nuevo usuario y login previo a la realización de cualquier acción con la web.
--Consulta sin necesidad de cuenta de los servicios que ésta ofrece
--Modificación de datos del usuario.
--Creación de citas para la asistencia al negocio además de la especificación del fin de la misma de entre los 5 servicios ofrecidos
--Consulta de citas pendientes del usuario o de citas concretas mediante su ID.
--Modificación de citas creadas previamente a fin de elegir una nueva fecha o servicio determinados.
--Consulta de servicios ofrecidos
--Consulta de todas las citas de los usuarios (super_admin)
--Creacion y consulta de roles para los usuarios (super_admin)
--Creación de nuevos servicios para la web (super_admin)
+- Registro de un nuevo usuario y login previo a la realización de cualquier acción con la web.
+- Consulta sin necesidad de cuenta de los servicios que ésta ofrece
+- Modificación de datos del usuario.
+- Creación de citas para la asistencia al negocio además de la especificación del fin de la misma de entre los 5 servicios ofrecidos
+- Consulta de citas pendientes del usuario o de citas concretas mediante su ID.
+- Modificación de citas creadas previamente a fin de elegir una nueva fecha o servicio determinados.
+- Consulta de servicios ofrecidos
+- Consulta de todas las citas de los usuarios (super_admin)
+- Creacion y consulta de roles para los usuarios (super_admin)
+- Creación de nuevos servicios para la web (super_admin)
 
 ### DIAGRAMA BD :clipboard:
 ![alt text](img/db_migrations.png)
@@ -45,12 +45,12 @@ https://github.com/MR-ant1/Tattoo-API.git
 Seguir los pasos descritos a continuación para preparar todo el entorno de la API:
 <details>
 <summary>INSTRUCCIONES</summary>
--1. Instalar Visual Studio Code, docker, algún cliente  y mysql workbrench en nuestro equipo. aqui dejo enlaces de descarga de docker y workbrench y un enlace a Postman, un ejemplo de cliente(también podemos añadir "Thunder Client desde las extensiones de visual studio code RECOMENDADO):
+- 1. Instalar Visual Studio Code, docker, algún cliente  y mysql workbrench en nuestro equipo. aqui dejo enlaces de descarga de docker y workbrench y un enlace a Postman, un ejemplo de cliente(también podemos añadir "Thunder Client desde las extensiones de visual studio code RECOMENDADO):
 - <a href=https://www.docker.com/products/docker-desktop/ >Docker Desktop </a>
 - <a href=https://downloads.mysql.com/archives/workbench/ > Mysql workbrench</a>
 - <a href=https://www.postman.com/downloads/ > Postman</a>
 - <a href=https://code.visualstudio.com/ > Visual studio Code</a>
--2. Abrimos windows powerShell e introducimos el siguiente comando para descargar la imagen de Mysql:
+- 2. Abrimos windows powerShell e introducimos el siguiente comando para descargar la imagen de Mysql:
 ```hash 
 docker pull mysql
 ```
@@ -59,19 +59,19 @@ seguido de este otro comando para establecer un contenedor con esa imagen. Detra
 docker run --name mysql-container -p 3307:3306 -e MYSQL_ROOT_PASSWORD=1234 -d mysql
 ```
 
--3. Crearemos una carpeta para el proyecto, la abriremos y ejecutaremos en consola el comando: 
+- 3. Crearemos una carpeta para el proyecto, la abriremos y ejecutaremos en consola el comando: 
 ``` hash
 git: init
 ```
 Una vez lo hayamos hecho, Clonaremos el repositorio con el comando "git clone https://github.com/MR-ant1/Tattoo-API.git"
--4. Abrir terminal y ejecutar en orden de aparición, los siguientes comandos:
+- 4. Abrir terminal y ejecutar en orden de aparición, los siguientes comandos:
 ``` bash
 npm init --y
 ```
 ``` bash
 npm install
 ```
--5. Crear archivo ".env". Usar el sample incluido con las referencias necesarias para introducir nuestros datos de contenedor y poder levantar el servidor. Dejo un ejemplo de configuración:
+- 5. Crear archivo ".env". Usar el sample incluido con las referencias necesarias para introducir nuestros datos de contenedor y poder levantar el servidor. Dejo un ejemplo de configuración:
 ``` bash
 PORT=4001
 
@@ -83,20 +83,20 @@ DB_DATABASE=TATTOO
 
 JWT_SECRET=SECRETO
 ```
--6. Crear base de datos en workbrench con el nombre igual al establecido en el archivo ".env" e importar la colección de endpoints a nuestro client. Esta se encuentra guardada en la carpeta HTTP
--7. Ejecutar migraciones mediante el comando:
+- 6. Crear base de datos en workbrench con el nombre igual al establecido en el archivo ".env" e importar la colección de endpoints a nuestro client. Esta se encuentra guardada en la carpeta HTTP
+- 7. Ejecutar migraciones mediante el comando:
 ``` bash
 typeorm-ts-node-commonjs migration:run -d ./src/database/db.ts
 ```
 Ésto enviará a nuestra base de datos el formato de nuestras tablas y sus relaciones
--8. Ejecutamos los seeders mediante el comando:
+- 8. Ejecutamos los seeders mediante el comando:
 ``` bash
 ts-node ./src/database/seeders/seeder.ts
 ```
 Con este comando añadiremos la información con los registros a nuestro mysql
--9. Levantamos servidor mediante el comando "npm run dev"
--10. Dirigirnos a nuestro client (thunderClient, insomnia, postman...) e importar el archivo de colecciones que incluye esta repositorio.
--11. Ya puedes probar las diferentes funciones del proyecto! mas abajo encontrarás toda la info sobre su funcionamiento.
+- 9. Levantamos servidor mediante el comando "npm run dev"
+- 10. Dirigirnos a nuestro client (thunderClient, insomnia, postman...) e importar el archivo de colecciones que incluye esta repositorio.
+- 11. Ya puedes probar las diferentes funciones del proyecto! mas abajo encontrarás toda la info sobre su funcionamiento.
 </details>
 
 

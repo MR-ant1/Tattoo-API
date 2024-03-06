@@ -9,6 +9,7 @@ export const isSuperAdmin = (req: Request, res: Response, next: NextFunction) =>
             })
         }
         next()
+        
     } catch (error) {
         res.status(500).json({
             success: false,
