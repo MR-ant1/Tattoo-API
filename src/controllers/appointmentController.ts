@@ -49,7 +49,10 @@ export const getAnAppointment = async (req: Request, res: Response) => {
         const AppointmentId = req.params.id
 
 
-        const myAppointment = await Appointment.findOne({ where: { id: parseInt(AppointmentId)},
+        const myAppointment = await Appointment.findOne({ where: { 
+            id: parseInt(AppointmentId),
+            user: {id:userId}
+        },
         relations: {
             service: true,
             user: true
