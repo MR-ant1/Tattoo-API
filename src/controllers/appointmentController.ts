@@ -49,23 +49,17 @@ export const getAnAppointment = async (req: Request, res: Response) => {
         const AppointmentId = req.params.id
 
 
-        const myAppointment = await Appointment.findOne({
-            where: { 
-                id: parseInt(AppointmentId),
-                user: {
-                    id:userId
-                }
-             },
-            relations: {
-                service: true,
-                user: true
-            },
-            select: {
-                id: true,
-                appointmentDate: true,
-                service: { serviceName: true },
-                user: { firstName: true }
-            }
+        const myAppointment = await Appointment.findOne({ where: { id: parseInt(AppointmentId)},
+        relations: {
+            service: true,
+            user: true
+        },
+        select: {
+            id: true,
+            appointmentDate: true,
+            service: {serviceName: true},
+            user: {firstName: true}
+        }
         })
 
             if (!myAppointment) {
