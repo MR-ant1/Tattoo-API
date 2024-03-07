@@ -49,7 +49,9 @@ Seguir los pasos descritos a continuación para preparar todo el entorno de la A
 - <a href=https://www.docker.com/products/docker-desktop/ >Docker Desktop </a>
 - <a href=https://downloads.mysql.com/archives/workbench/ > Mysql workbrench</a>
 - <a href=https://www.postman.com/downloads/ > Postman</a>
-- <a href=https://code.visualstudio.com/ > Visual studio Code</a>
+- <a href=https://code.visualstudio.com/ > Visual studio Code</a>  
+
+
 - 2. Abrimos windows powerShell e introducimos el siguiente comando para descargar la imagen de Mysql:
 ```hash 
 docker pull mysql

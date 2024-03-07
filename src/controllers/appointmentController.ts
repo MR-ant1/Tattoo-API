@@ -17,6 +17,7 @@ export const getMyAppointments = async (req: Request, res: Response) => {
                 },
 
                 select: {
+                    user: {firstName:true, lastName:true},
                     id: true,
                     appointmentDate: true,
                     service: {serviceName:true}
