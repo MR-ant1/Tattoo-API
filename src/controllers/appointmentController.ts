@@ -17,10 +17,10 @@ export const getMyAppointments = async (req: Request, res: Response) => {
                 },
 
                 select: {
-                    user: {firstName:true, lastName:true},
+                    user: { firstName: true, lastName: true },
                     id: true,
                     appointmentDate: true,
-                    service: {serviceName:true}
+                    service: { serviceName: true }
                 }
             }
         )
@@ -49,20 +49,24 @@ export const getAnAppointment = async (req: Request, res: Response) => {
         const AppointmentId = req.params.id
 
 
-        const myAppointment = await Appointment.findOne({ where: { id: parseInt(AppointmentId)},
-        relations: {
-            service: true,
-            user: true
-        },
-        select: {
-            id: true,
-            appointmentDate: true,
-            service: {serviceName: true},
-            user: {firstName: true}
-        }
+        const myAppointment = await Appointment.findOne({
+            where: { 
+                id: parseInt(AppointmentId),
+                user: {
+                    id:userId
+                }
+             },
+            relations: {
+                service: true,
+                user: true
+            },
+            select: {
+                id: true,
+                appointmentDate: true,
+                service: { serviceName: true },
+                user: { firstName: true }
+            }
         })
-
-        if (req.tokenData.userId !== userId)
 
             if (!myAppointment) {
                 return res.status(401).json({
@@ -136,16 +140,16 @@ export const updateAppointment = async (req: Request, res: Response) => {
         const appointmentDate = (req.body.appointmentDate) as Date
         const userId = req.tokenData.userId
         const serviceId = req.body.serviceId
-        
-   
+
+
         const selectedAppointment = await Appointment.findOne({
-            where: { 
+            where: {
                 id: appointmentId,
-                user: {id:userId} 
+                user: { id: userId }
             }
-          }
+        }
         )
-   
+
         if (!selectedAppointment) {
             return res.status(400).json({
                 success: false,
@@ -158,13 +162,13 @@ export const updateAppointment = async (req: Request, res: Response) => {
                 message: "New date is needed"
             })
         }
-        
+
         const newAppointmentDate = Appointment.update(
             { id: appointmentId },
             {
                 appointmentDate: appointmentDate,
                 service: {
-                    id: serviceId 
+                    id: serviceId
                 }
             }
         )
