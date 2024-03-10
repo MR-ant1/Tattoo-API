@@ -4,22 +4,22 @@ import { profile } from "console";
 
 export const getUsers = async (req: Request, res: Response) => {
     try {
-        const limit= Number(req.query.limit) || 10
+        const limit = Number(req.query.limit) || 10
         const page = Number(req.query.page) || 1
-        const skip = (page -1)*limit as number
+        const skip = (page - 1) * limit as number
 
 
         if (limit > 25) {
-            res.status(401).json ({
+            res.status(401).json({
                 success: false,
                 message: "you exceed the users limit"
             })
         }
 
         const users = await User.find(
-        
-            
-        
+
+
+
             {
                 select: {
                     id: true,
@@ -28,7 +28,7 @@ export const getUsers = async (req: Request, res: Response) => {
                     email: true
                 },
                 take: limit,
-                skip: skip 
+                skip: skip
             }
         )
         if (!users) {
@@ -82,16 +82,9 @@ export const getUserById = async (req: Request, res: Response) => {
 export const getProfile = async (req: Request, res: Response) => {
     try {
         const userId = req.tokenData.userId
-        if (req.tokenData.userId !== (userId)) {
-            res.status(400).json({
-                success: false,
-                message: "profile couldnt retrieve"
-            })
-        }
+
         const user = await User.findOneBy(
             { id: (userId) }
-            
-
         )
         res.status(200).json({
             success: true,
@@ -107,36 +100,38 @@ export const getProfile = async (req: Request, res: Response) => {
     }
 }
 
-export const updateProfile = async (req:Request, res: Response) => {
-    try {   
-           const userId = req.tokenData.userId
-           const firstName = req.body.firstName
-           const lastName = req.body.lastName
-           const email = req.body.email
-           
-   
-           if (!firstName || !lastName || !email){
-               res.status(400).json ({
-                   success: false,
-                   message:"first Name, lastName and email are needed"
-               })
-           }
-           const userUpdated = User.update (
-              {id: userId},
-              { firstName: firstName,
+export const updateProfile = async (req: Request, res: Response) => {
+    try {
+        const userId = req.tokenData.userId
+        const firstName = req.body.firstName
+        const lastName = req.body.lastName
+        const email = req.body.email
+
+
+        if (!firstName || !lastName || !email) {
+            return res.status(400).json({
+                success: false,
+                message: "first Name, lastName and email are needed"
+            })
+        }
+        const userUpdated = User.update(
+            { id: userId },
+            {
+                firstName: firstName,
                 lastName: lastName,
                 email: email
-                } 
-           )
-       res.status(200).json({
-           success: true,
-           message:"user updated",
-           data: userUpdated
-       })
-   } catch (error) {
-       res.status(500).json({
-           success: false,
-           message: "can't update user",
-           error: error
-       })
-   }}
+            }
+        )
+        res.status(200).json({
+            success: true,
+            message: "user updated",
+            newFIrstName: firstName, lastName, email
+        })
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "can't update user",
+            error: error
+        })
+    }
+}

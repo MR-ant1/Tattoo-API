@@ -99,7 +99,7 @@ export const createAppointments = async (req: Request, res: Response) => {
         const userId = req.tokenData.userId
 
         if (!serviceId) {
-            res.status(400).json({
+           return res.status(400).json({
                 success: false,
                 message: "service_id is required"
             })
@@ -174,7 +174,7 @@ export const updateAppointment = async (req: Request, res: Response) => {
         res.status(200).json({
             success: true,
             message: "appointment updated",
-            data: newAppointmentDate
+            newDate: appointmentDate, service: {serviceId}
         })
     } catch (error) {
         res.status(500).json({

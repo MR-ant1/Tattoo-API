@@ -96,7 +96,7 @@ export const login = async (req: Request, res: Response) => {
         )
 
         if (!user) {
-            res.status(400).json({
+            return res.status(400).json({
                 success: false,
                 message: "Email or password invalid"
             })
