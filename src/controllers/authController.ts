@@ -11,10 +11,10 @@ export const registerUser = async (req: Request, res: Response) => {
         const password = req.body.password
 
 
-        if (password.length < 8 || password.length > 20) {
+        if (password.length < 8 || password.length > 14) {
             return res.status(400).json({
                 success: false,
-                message: "Password must contain between 6 and 10 characters"
+                message: "Password must contain between 8 and 14 characters"
             })
         }
 
@@ -29,7 +29,6 @@ export const registerUser = async (req: Request, res: Response) => {
             )
         }
         const passwordEncrypted = bcrypt.hashSync(password, 5)
-        console.log(passwordEncrypted);
 
         const newUser = await User.create({
             firstName: firstName,
@@ -41,7 +40,7 @@ export const registerUser = async (req: Request, res: Response) => {
         res.status(201).json({
             success: true,
             message: "User registered succesfully",
-            data: newUser
+            data: firstName
         })
     } catch (error) {
         res.status(500).json({
@@ -114,6 +113,7 @@ export const login = async (req: Request, res: Response) => {
         const token = jwt.sign(
             {
                 userId: user!.id,
+                firstName: user!.firstName,
                 roleName: user!.role.name
             },
             process.env.JWT_SECRET as string,
