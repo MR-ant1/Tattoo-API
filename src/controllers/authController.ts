@@ -52,7 +52,7 @@ export const registerUser = async (req: Request, res: Response) => {
 }
 
 export const login = async (req: Request, res: Response) => {
-    
+
     try {
         const email = req.body.email
         const password = req.body.password
@@ -73,7 +73,7 @@ export const login = async (req: Request, res: Response) => {
                 }
             )
         }
-                //   |  DE MANERA TEMPORAL SE INCLUYE ANY AL NO PODER DELCARARSE USER EN LA VERIFICACION DE CONTRASEÑA
+
         const user = await User.findOne(
             {
                 where: {
@@ -113,12 +113,11 @@ export const login = async (req: Request, res: Response) => {
         const token = jwt.sign(
             {
                 userId: user!.id,
-                firstName: user!.firstName,
                 roleName: user!.role.name
             },
             process.env.JWT_SECRET as string,
             {
-                expiresIn: "2h"
+                expiresIn: "200h"
             }
         )
 

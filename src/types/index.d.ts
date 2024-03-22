@@ -1,6 +1,5 @@
 export interface TokenData {
     userId: number;
-    firstName: string;
     roleName: string;
 };
 
