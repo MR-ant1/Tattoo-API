@@ -3,14 +3,21 @@ import { Service } from "../models/Service";
 
 export const getServices = async (req: Request, res: Response) => {
     try {
-        const users = await Service.find()
+        const services = await Service.find(
+            {
+            select: {
+                serviceName: true,
+                description:true   
+            }   
+            })
 
         res.status(200).json(
             {
                 success: true,
                 message: 'Services retrieved succesfully',
-                data: users
+                data: services
             }
+            
         )
     } catch (error) {
         res.status(500).json({
