@@ -105,15 +105,15 @@ export const createAppointments = async (req: Request, res: Response) => {
             })
         }
 
-        if (appointmentDate < new Date() || !appointmentDate) {
-            return res.status(401).json({
-                success: false,
-                message: "Couldnt create appointment"
-            })
-        }
+        // if (appointmentDate < new Date || !appointmentDate) {
+        //     return res.status(401).json({
+        //         success: false,
+        //         message: "Couldnt create appointment"
+        //     })
+        // }
         const newAppointmentDate = await Appointment.create({
             appointmentDate: appointmentDate,
-            service: { id: parseInt(serviceId) },
+            service: { id: serviceId },
             user: { id: userId }
         }).save()
 

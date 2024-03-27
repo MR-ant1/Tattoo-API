@@ -6,7 +6,7 @@ import { createAppointments, updateAppointment, getMyAppointments, getAnAppointm
 import { login, registerUser } from "./controllers/authController";
 import { auth } from "./middlewares/auth";
 import { isSuperAdmin } from "./middlewares/isSuperAdmin";
-import  cors  from "cors"
+import cors from "cors"
 
 
 export const app: Application = express();
