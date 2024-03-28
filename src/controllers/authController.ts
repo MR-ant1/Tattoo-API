@@ -84,6 +84,7 @@ export const login = async (req: Request, res: Response) => {
                 },
                 select: {
                     id: true,
+                    firstName: true,
                     password: true,
                     email: true,
                     role: {
