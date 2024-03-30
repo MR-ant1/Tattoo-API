@@ -184,3 +184,39 @@ export const updateAppointment = async (req: Request, res: Response) => {
         })
     }
 }
+
+export const deleteMyAppointment = async (req: Request, res: Response) => {
+    try {
+
+        const appointmentId = req.body.appointmentId
+        const userId = req.tokenData.userId
+
+        const appointmentToDelete = await Appointment.findOne(
+            { where: {
+                id: appointmentId,
+                user: {id:userId}
+            }}
+            ) 
+
+        if (!appointmentToDelete) {
+            return res.status(400).json({
+                success: false,
+                message: "This appointment doensnt exists"
+            })
+        } else {
+        const deletedAppointment = await Appointment.delete({id:appointmentId})
+        res.status(200).json({
+            success: true,
+            message: "appointment deleted",
+            deleted: appointmentId
+        })
+        }
+        
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "can't delete appointment",
+            error: error
+        })
+    }
+}

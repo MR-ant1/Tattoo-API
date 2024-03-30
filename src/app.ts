@@ -2,7 +2,7 @@ import express, { Application } from "express";
 import { createRoles, getRoles } from "./controllers/roleController";
 import { getUsers, getUserById, getProfile, updateProfile } from "./controllers/userController";
 import { getServices, createServices } from "./controllers/serviceController";
-import { createAppointments, updateAppointment, getMyAppointments, getAnAppointment } from "./controllers/appointmentController"
+import { createAppointments, updateAppointment, getMyAppointments, getAnAppointment, deleteMyAppointment } from "./controllers/appointmentController"
 import { login, registerUser } from "./controllers/authController";
 import { auth } from "./middlewares/auth";
 import { isSuperAdmin } from "./middlewares/isSuperAdmin";
@@ -35,7 +35,7 @@ app.get('/api/appointments', auth, getMyAppointments)
 app.post('/api/appointments', auth, createAppointments)
 app.put('/api/appointments', auth, updateAppointment)
 app.get("/api/appointments/:id", auth, getAnAppointment)
-
+app.delete("/api/appointments", auth, deleteMyAppointment)
 
 //auth routes
 app.post('/api/auth/register', registerUser)
