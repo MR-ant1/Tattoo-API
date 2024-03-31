@@ -10,7 +10,7 @@ const generateFakeUser = () => {
     userFaker.firstName = faker.person.firstName();
     userFaker.lastName = faker.person.lastName();
     userFaker.email = faker.internet.email();
-    userFaker.password = bcrypt.hashSync("useruser", 5);
+    userFaker.password = bcrypt.hashSync("aA123456", 5);
     userFaker.role = new Role()
     userFaker.role.id = 1
     return userFaker;
@@ -24,7 +24,7 @@ export const userSeedDataBase = async () => {
             userAdmin.firstName = "admin"
             userAdmin.lastName = "user"
             userAdmin.email = "admin@admin.com"
-            userAdmin.password = bcrypt.hashSync("useruser", 5)
+            userAdmin.password = bcrypt.hashSync("aA123456", 5)
             userAdmin.role = new Role()
             userAdmin.role.id = 2
 
@@ -34,14 +34,14 @@ export const userSeedDataBase = async () => {
             userSuperAdmin.firstName = "super_admin"
             userSuperAdmin.lastName = "super_admin"
             userSuperAdmin.email = "superadmin@superadmin.com"
-            userSuperAdmin.password = bcrypt.hashSync("useruser", 5)
+            userSuperAdmin.password = bcrypt.hashSync("aA123456", 5)
             userSuperAdmin.role = new Role()
             userSuperAdmin.role.id = 3
 
             await userSuperAdmin.save()
 
             
-            const fakeUsers = Array.from({ length: 50 }, generateFakeUser);
+            const fakeUsers = Array.from({ length: 10 }, generateFakeUser);
             await User.save(fakeUsers);
     
     } catch (error) {

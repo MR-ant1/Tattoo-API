@@ -188,27 +188,20 @@ export const updateAppointment = async (req: Request, res: Response) => {
 export const deleteMyAppointment = async (req: Request, res: Response) => {
     try {
 
-        const appointmentId = req.body.appointmentId
+        const appointmentId = req.params.id
         const userId = req.tokenData.userId
 
-        const appointmentToDelete = await Appointment.findOne(
-            { where: {
-                id: appointmentId,
-                user: {id:userId}
-            }}
-            ) 
-
-        if (!appointmentToDelete) {
+        if (!appointmentId) {
             return res.status(400).json({
                 success: false,
-                message: "This appointment doensnt exists"
+                message: "This appointment doesnt exists"
             })
         } else {
-        const deletedAppointment = await Appointment.delete({id:appointmentId})
+        const deletedAppointment = await Appointment.delete(appointmentId)
         res.status(200).json({
             success: true,
             message: "appointment deleted",
-            deleted: appointmentId
+            data: appointmentId
         })
         }
         

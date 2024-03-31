@@ -4,17 +4,17 @@ import { User } from "../models/User";
 
 export const getUsers = async (req: Request, res: Response) => {
     try {
-        const limit = Number(req.query.limit) || 10
-        const page = Number(req.query.page) || 1
-        const skip = (page - 1) * limit as number
+        // const limit = Number(req.query.limit) || 10
+        // const page = Number(req.query.page) || 1
+        // const skip = (page - 1) * limit as number
 
 
-        if (limit > 25) {
-            res.status(401).json({
-                success: false,
-                message: "you exceed the users limit"
-            })
-        }
+        // if (limit > 25) {
+        //     res.status(401).json({
+        //         success: false,
+        //         message: "you exceed the users limit"
+        //     })
+        // }
 
         const users = await User.find(
 
@@ -25,8 +25,8 @@ export const getUsers = async (req: Request, res: Response) => {
                     lastName: true,
                     email: true
                 },
-                take: limit,
-                skip: skip
+                // take: limit,
+                // skip: skip
             }
         )
         if (!users) {
@@ -126,6 +126,34 @@ export const updateProfile = async (req: Request, res: Response) => {
         res.status(500).json({
             success: false,
             message: "can't update user",
+            error: error
+        })
+    }
+}
+
+export const deleteUserById = async (req: Request, res: Response) => {
+    try {
+
+        const deletedId = req.params.id
+
+        if (!deletedId) {
+            return res.status(400).json({
+                success: false,
+                message: "This appointment doesnt exists"
+            })
+        } else {
+        const deletedUser = await User.delete(deletedId)
+        res.status(200).json({
+            success: true,
+            message: "appointment deleted",
+            data: deletedId
+        })
+        }
+        
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "can't delete appointment",
             error: error
         })
     }
