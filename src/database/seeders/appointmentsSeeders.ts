@@ -14,7 +14,7 @@ const generateFakeAppointment = () => {
     randomAppointment.appointmentDate = faker.date.anytime()
     
     randomAppointment.user = new User()
-    randomAppointment.user.id = faker.number.int({min:1, max:9})
+    randomAppointment.user.id = faker.number.int({min:1, max:18})
     
     randomAppointment.service = new Service()
     randomAppointment.service.id = faker.number.int({min:1, max:5})
