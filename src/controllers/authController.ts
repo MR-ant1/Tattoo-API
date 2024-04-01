@@ -10,6 +10,12 @@ export const registerUser = async (req: Request, res: Response) => {
         const email = req.body.email
         const password = req.body.password
 
+        if (firstName.length < 3 || lastName.length < 3) {
+            return res.status(400).json({
+                success: false,
+                message: "FirstName and lastName must contain at least 3 characters"
+            })
+        }
 
         if (password.length < 8 || password.length > 14) {
             return res.status(400).json({

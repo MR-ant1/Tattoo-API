@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Proyecto api tattoo FSD",
-    "dateExported": "2024-03-05T17:49:42.017Z",
+    "dateExported": "2024-04-01T08:21:19.865Z",
     "version": "1.1",
     "folders": [
         {
@@ -50,12 +50,12 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2024-02-29T18:36:29.719Z",
-            "modified": "2024-03-05T08:36:20.584Z",
+            "modified": "2024-03-27T08:26:19.388Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"email\":\"Berta68@yahoo.com\",\n  \"password\":\"useruser\"\n}",
+                "raw": "{\n  \"email\":\"superadmin@superadmin.com\",\n  \"password\":\"aA123456\"\n}",
                 "form": []
             },
             "tests": []
@@ -69,13 +69,18 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2024-02-29T21:16:24.472Z",
-            "modified": "2024-02-29T21:41:07.825Z",
+            "modified": "2024-03-10T18:54:41.354Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
                 "raw": "{\n  \"serviceName\": \"Venta de piercings y otros artículos\",\n  \"description\": \"Además de nuestros servicios de aplicación, ofrecemos una selección de piercings y otros artículos relacionados con el arte corporal. Los clientes pueden adquirir productos de calidad para complementar su estilo único.\"\n}",
                 "form": []
+            },
+            "reqType": "post",
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGVOYW1lIjoidXNlciIsImlhdCI6MTcxMDA5NjU4NSwiZXhwIjoxNzEwMTAzNzg1fQ.5rV6DyE3bjMm-FKL_R1GvORSSkJtE3GuviX1QC-UEUw"
             },
             "tests": []
         },
@@ -99,20 +104,6 @@
             "tests": []
         },
         {
-            "_id": "dfbd8f29-6e9f-43d7-a7cf-81b0d651f447",
-            "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
-            "containerId": "291f2ce1-e017-4324-8ce6-d3849d9c2f12",
-            "name": "Create User",
-            "url": "localhost:4001/api/users",
-            "method": "POST",
-            "sortNum": 10000,
-            "created": "2024-02-29T22:50:40.384Z",
-            "modified": "2024-02-29T23:12:49.889Z",
-            "headers": [],
-            "params": [],
-            "tests": []
-        },
-        {
             "_id": "573197df-efa2-49d9-bc46-82dc5654c1e6",
             "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
             "containerId": "e2b97568-d9f3-429f-a025-c8a0e4867d98",
@@ -121,12 +112,12 @@
             "method": "POST",
             "sortNum": 20000,
             "created": "2024-02-29T18:40:19.610Z",
-            "modified": "2024-03-02T16:18:17.135Z",
+            "modified": "2024-03-22T19:39:23.303Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"firstName\": \"user2\",\n  \"lastName\": \"dePrueba2\",\n  \"email\": \"user2@user2.com\",\n  \"password\": \"useruser\"\n}",
+                "raw": "{\n  \"firstName\": \"user2\",\n  \"lastName\": \"dePrueba2\",\n  \"email\": \"prueba@front.com\",\n  \"password\": \"aA123456\"\n}",
                 "form": []
             },
             "tests": []
@@ -140,9 +131,10 @@
             "method": "GET",
             "sortNum": 20000,
             "created": "2024-02-29T21:28:30.378Z",
-            "modified": "2024-02-29T23:12:05.497Z",
+            "modified": "2024-03-10T18:55:39.570Z",
             "headers": [],
             "params": [],
+            "reqType": "get",
             "tests": []
         },
         {
@@ -154,12 +146,12 @@
             "method": "GET",
             "sortNum": 20000,
             "created": "2024-02-29T23:06:02.104Z",
-            "modified": "2024-03-03T12:13:30.892Z",
+            "modified": "2024-03-27T08:31:35.713Z",
             "headers": [],
             "params": [],
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsInJvbGVOYW1lIjoidXNlciIsImlhdCI6MTcwOTQ2Nzk5NiwiZXhwIjoxNzA5NDc1MTk2fQ.uWeIVySqndXjQ5G5FB-t_wtCRUIr1oYjeYlDR6rFj2Q"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE3MTE1Mjc5NzksImV4cCI6MTcxMjI0Nzk3OX0.tF2TnSo7dSENXI7fmwzG_tAMtU6JAWBVYDEbY4CU0rA"
             },
             "tests": []
         },
@@ -172,17 +164,17 @@
             "method": "POST",
             "sortNum": 30000,
             "created": "2024-03-01T18:01:03.625Z",
-            "modified": "2024-03-04T10:28:27.415Z",
+            "modified": "2024-03-27T10:27:56.496Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"appointmentDate\": \"2026-12-11T18:00:00\",\n  \"serviceId\": \"1\"\n}",
+                "raw": "{\n  \"appointmentDate\": \"2028-12-11 18:00:00\",\n  \"serviceId\": \"3\"\n}",
                 "form": []
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsInJvbGVOYW1lIjoidXNlciIsImlhdCI6MTcwOTU0ODA2NiwiZXhwIjoxNzA5NTU1MjY2fQ.JxLiRseyXqluj5b2AaNQvq0bviOTSS2XAFa7B24_RQY"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE3MTE1MzExNjcsImV4cCI6MTcxMjI1MTE2N30.otflFDauAm8bR5E4xZ3nQ8KDwQXiq-qJRlOyaMJGefg"
             },
             "tests": []
         },
@@ -195,17 +187,17 @@
             "method": "PUT",
             "sortNum": 50000,
             "created": "2024-03-01T18:57:47.435Z",
-            "modified": "2024-03-03T12:27:14.225Z",
+            "modified": "2024-03-24T18:19:00.787Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"firstName\": \"lolo\",\n  \"lastName\": \"juares\",\n  \"email\": \"actualizando@user.com\"\n}",
+                "raw": "{\n  \"firstName\": \"super\",\n  \"lastName\": \"admin\",\n  \"email\": \"superadmin@superadmin.com\",\n  \"password\": \"aA123456\"\n}",
                 "form": []
             },
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsInJvbGVOYW1lIjoidXNlciIsImlhdCI6MTcwOTQ2Nzk5NiwiZXhwIjoxNzA5NDc1MTk2fQ.uWeIVySqndXjQ5G5FB-t_wtCRUIr1oYjeYlDR6rFj2Q"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE3MTEzMDQzMTIsImV4cCI6MTcxMjAyNDMxMn0.KDAIGNBTfkzXo2txZZtRV8x0CeDM-SNklA9cV23s64w"
             },
             "tests": []
         },
@@ -218,17 +210,18 @@
             "method": "PUT",
             "sortNum": 60000,
             "created": "2024-03-01T19:26:14.057Z",
-            "modified": "2024-03-04T17:20:03.611Z",
+            "modified": "2024-03-10T18:55:56.666Z",
             "headers": [],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n \"appointmentId\": 4,\n \"appointmentDate\": \"2026-06-26 14:00:00\",\n \"serviceId\": 5\n}",
+                "raw": "{\n \"appointmentId\": 51,\n \"appointmentDate\": \"2026-06-26 14:00:00\",\n \"serviceId\": 5\n}",
                 "form": []
             },
+            "reqType": "put",
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsInJvbGVOYW1lIjoidXNlciIsImlhdCI6MTcwOTU3MjYzMSwiZXhwIjoxNzA5NTc5ODMxfQ.CDpLDw9hJqMzvnUVngE3vugYhPlR9zBwH0wybgmPEa0"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE3MTAwOTYwOTMsImV4cCI6MTcxMDEwMzI5M30.5VB7qkNwSC5Ue2cuZcCenkmla0GT54YShgsxd_nPmi8"
             },
             "tests": []
         },
@@ -237,16 +230,17 @@
             "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
             "containerId": "6cb26b60-5cff-4a91-91a2-71602e073f9b",
             "name": "Get An Appointment",
-            "url": "localhost:4001/api/appointments/8",
+            "url": "localhost:4001/api/appointments/51",
             "method": "GET",
             "sortNum": 70000,
             "created": "2024-03-02T14:46:37.458Z",
-            "modified": "2024-03-04T08:14:20.530Z",
+            "modified": "2024-03-10T19:05:35.516Z",
             "headers": [],
             "params": [],
+            "reqType": "get",
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsInJvbGVOYW1lIjoidXNlciIsImlhdCI6MTcwOTUzOTcyMywiZXhwIjoxNzA5NTQ2OTIzfQ.zXcsQPOYTn6cxgChbqgtzahnQHx4dMPT3B0i-KvLbIg"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInJvbGVOYW1lIjoidXNlciIsImlhdCI6MTcxMDA5NzUyOSwiZXhwIjoxNzEwMTA0NzI5fQ.lXr27QWFggPmzQIwbCofTYJ0_VNxqlEguhKNF1yvAvs"
             },
             "tests": []
         },
@@ -259,12 +253,12 @@
             "method": "GET",
             "sortNum": 80000,
             "created": "2024-03-02T15:46:53.831Z",
-            "modified": "2024-03-03T16:57:38.696Z",
+            "modified": "2024-03-28T11:09:16.916Z",
             "headers": [],
             "params": [],
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsInJvbGVOYW1lIjoidXNlciIsImlhdCI6MTcwOTQ4NTA0NCwiZXhwIjoxNzA5NDkyMjQ0fQ.2tzERrGENdt2ukW-Du5BOJeXc7Du8BAdc3vMDHVfYmc"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoic3VwZXJfYWRtaW4iLCJmaXJzdE5hbWUiOiJBbnR1YW4iLCJpYXQiOjE3MTE2MjQxMzksImV4cCI6MTcxMjM0NDEzOX0.oMQO-qYpOJmf_tY_sEL44bFvfx_jHDUysXzsGiyHwrA"
             },
             "tests": []
         },
@@ -273,27 +267,57 @@
             "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
             "containerId": "291f2ce1-e017-4324-8ce6-d3849d9c2f12",
             "name": "Get Users",
-            "url": "localhost:4001/api/users?limit=2&page=2",
+            "url": "localhost:4001/api/users",
             "method": "GET",
             "sortNum": 90000,
             "created": "2024-03-04T09:08:13.362Z",
-            "modified": "2024-03-04T09:28:29.667Z",
+            "modified": "2024-03-30T15:59:37.633Z",
             "headers": [],
-            "params": [
-                {
-                    "name": "limit",
-                    "value": "2",
-                    "isPath": false
-                },
-                {
-                    "name": "page",
-                    "value": "2",
-                    "isPath": false
-                }
-            ],
+            "params": [],
             "auth": {
                 "type": "bearer",
-                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsInJvbGVOYW1lIjoidXNlciIsImlhdCI6MTcwOTU0MzYwOCwiZXhwIjoxNzA5NTUwODA4fQ.fYhk1vIZywtysoTZuEm_TeCZKbQmOXF_0aZ9SxYJR6Q"
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoic3VwZXJfYWRtaW4iLCJmaXJzdE5hbWUiOiJBbnR1YW4iLCJpYXQiOjE3MTE4MTQzMjMsImV4cCI6MTcxMjUzNDMyM30.pTVtMPxvc2PgWRMuKT8EKVW9TLS36aVwIq0jC9OAEvE"
+            },
+            "tests": []
+        },
+        {
+            "_id": "d6f15cf9-c4b1-4979-97ec-ac9f414e87d5",
+            "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
+            "containerId": "6cb26b60-5cff-4a91-91a2-71602e073f9b",
+            "name": "Delete My Appointment",
+            "url": "localhost:4001/api/appointments",
+            "method": "DELETE",
+            "sortNum": 100000,
+            "created": "2024-03-30T11:35:38.323Z",
+            "modified": "2024-03-30T17:20:07.125Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"appointmentId\": \"55\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoic3VwZXJfYWRtaW4iLCJmaXJzdE5hbWUiOiJBbnR1YW4iLCJpYXQiOjE3MTE3OTk1MjUsImV4cCI6MTcxMjUxOTUyNX0.zXRj-_9R5RNl55ZSSIiJpStph2IisgbZDKQONZIlE10"
+            },
+            "tests": []
+        },
+        {
+            "_id": "da978696-ab19-4bac-861d-76bbcb9c5862",
+            "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
+            "containerId": "291f2ce1-e017-4324-8ce6-d3849d9c2f12",
+            "name": "Delete User By Id",
+            "url": "localhost:4001/api/users/21",
+            "method": "DELETE",
+            "sortNum": 110000,
+            "created": "2024-03-30T17:55:25.609Z",
+            "modified": "2024-03-30T18:03:40.893Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoic3VwZXJfYWRtaW4iLCJmaXJzdE5hbWUiOiJBbnR1YW4iLCJpYXQiOjE3MTE4MjEzNjYsImV4cCI6MTcxMjU0MTM2Nn0.QOAJ9z6zapJKvGkC_6gK-XoS7sC-u2Y0aUxtwchPJLQ"
             },
             "tests": []
         }
