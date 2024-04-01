@@ -41,7 +41,7 @@ export const userSeedDataBase = async () => {
             await userSuperAdmin.save()
 
             
-            const fakeUsers = Array.from({ length: 10 }, generateFakeUser);
+            const fakeUsers = Array.from({ length: 7 }, generateFakeUser);
             await User.save(fakeUsers);
     
     } catch (error) {
