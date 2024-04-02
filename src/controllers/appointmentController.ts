@@ -197,6 +197,19 @@ export const deleteMyAppointment = async (req: Request, res: Response) => {
                 message: "This appointment doesnt exists"
             })
         } else {
+        const findAppointment =await Appointment.findOne({
+           where: 
+           {id:parseInt(appointmentId),
+            user:{id:userId}}
+        })
+        
+        if (!findAppointment) {
+            return res.status(400).json({
+                success: false,
+                message: "Couldnt find your appointment"
+            })
+        }
+        
         const deletedAppointment = await Appointment.delete(appointmentId)
         res.status(200).json({
             success: true,

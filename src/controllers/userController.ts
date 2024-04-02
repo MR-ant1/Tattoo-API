@@ -135,6 +135,7 @@ export const deleteUserById = async (req: Request, res: Response) => {
     try {
 
         const deletedId = req.params.id
+        const userId = req.tokenData.userId
 
         if (!deletedId) {
             return res.status(400).json({
@@ -142,6 +143,15 @@ export const deleteUserById = async (req: Request, res: Response) => {
                 message: "This appointment doesnt exists"
             })
         } else {
+            const findUser =await User.findOne({
+             where: {id: parseInt(deletedId)}
+            })
+            if (!findUser) {
+                return res.status(400).json({
+                    success: false,
+                    message: "This user doesnt exists"
+                })   
+            }
         const deletedUser = await User.delete(deletedId)
         res.status(200).json({
             success: true,
