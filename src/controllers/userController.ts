@@ -143,7 +143,7 @@ export const deleteUserById = async (req: Request, res: Response) => {
                 message: "This appointment doesnt exists"
             })
         } else {
-            const findUser =await User.findOne({
+            const findUser: any =await User.findOne({
              where: {id: parseInt(deletedId)}
             })
             if (!findUser) {
@@ -152,7 +152,7 @@ export const deleteUserById = async (req: Request, res: Response) => {
                     message: "This user doesnt exists"
                 })   
             }
-        const deletedUser = await User.delete(deletedId)
+        const deletedUser = await User.delete(findUser)
         res.status(200).json({
             success: true,
             message: "appointment deleted",
