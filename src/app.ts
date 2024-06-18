@@ -13,15 +13,7 @@ export const app: Application = express();
 
 
 app.use(express.json());
-
-const corsOptions = {
-    origin: 'https://tu-tattoo-front.vercel.app/',
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    optionsSuccessStatus: 200
-};
-
-app.use(cors(corsOptions))
+app.use(cors())
 
 //roles routes
 app.get('/api/roles', auth, isSuperAdmin, getRoles)
