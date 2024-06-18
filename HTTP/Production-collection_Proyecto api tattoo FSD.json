@@ -1,0 +1,295 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Proyecto api tattoo FSD",
+    "collectionId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
+    "dateExported": "2024-06-18T15:23:14.852Z",
+    "version": "1.2",
+    "folders": [
+        {
+            "_id": "291f2ce1-e017-4324-8ce6-d3849d9c2f12",
+            "name": "USER",
+            "containerId": "",
+            "created": "2024-03-01T12:35:08.697Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "e2b97568-d9f3-429f-a025-c8a0e4867d98",
+            "name": "AUTH",
+            "containerId": "",
+            "created": "2024-03-01T12:35:15.177Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "2c6db274-6715-484e-af6e-c307be53dca7",
+            "name": "SERVICES",
+            "containerId": "",
+            "created": "2024-03-01T12:35:24.404Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "2dc17aa2-8dfb-4752-920e-5cb8a8e4e5d1",
+            "name": "ROLES",
+            "containerId": "",
+            "created": "2024-03-01T12:35:36.757Z",
+            "sortNum": 40000
+        },
+        {
+            "_id": "6cb26b60-5cff-4a91-91a2-71602e073f9b",
+            "name": "APPOINTMENTS",
+            "containerId": "",
+            "created": "2024-03-01T18:00:45.639Z",
+            "sortNum": 50000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "fa1c2bf3-5899-4551-bf54-2cb9e5f69f22",
+            "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
+            "containerId": "e2b97568-d9f3-429f-a025-c8a0e4867d98",
+            "name": "auth login",
+            "url": "api-TuTattoo.up.railway.app/api/auth/login",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-02-29T18:36:29.719Z",
+            "modified": "2024-06-18T14:51:12.365Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\":\"superadmin@superadmin.com\",\n  \"password\":\"aA123456\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "9696a42c-4e00-4036-9383-7f700a707ea6",
+            "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
+            "containerId": "2c6db274-6715-484e-af6e-c307be53dca7",
+            "name": "Create Services",
+            "url": "api-TuTattoo.up.railway.app/api/services",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-02-29T21:16:24.472Z",
+            "modified": "2024-06-18T15:21:18.568Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"serviceName\": \"Venta de piercings y otros artículos\",\n  \"description\": \"Además de nuestros servicios de aplicación, ofrecemos una selección de piercings y otros artículos relacionados con el arte corporal. Los clientes pueden adquirir productos de calidad para complementar su estilo único.\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsInJvbGVOYW1lIjoidXNlciIsImlhdCI6MTcxMDA5NjU4NSwiZXhwIjoxNzEwMTAzNzg1fQ.5rV6DyE3bjMm-FKL_R1GvORSSkJtE3GuviX1QC-UEUw"
+            }
+        },
+        {
+            "_id": "e1475a9c-91ae-448c-bec9-dc3d303320ca",
+            "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
+            "containerId": "2dc17aa2-8dfb-4752-920e-5cb8a8e4e5d1",
+            "name": "Create Roles",
+            "url": "api-TuTattoo.up.railway.app/api/roles",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-02-29T21:30:48.989Z",
+            "modified": "2024-06-18T15:21:33.586Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"mega admin\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "573197df-efa2-49d9-bc46-82dc5654c1e6",
+            "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
+            "containerId": "e2b97568-d9f3-429f-a025-c8a0e4867d98",
+            "name": "auth user register",
+            "url": "api-TuTattoo.up.railway.app/api/auth/register",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-02-29T18:40:19.610Z",
+            "modified": "2024-06-18T15:20:48.129Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"firstName\": \"user2\",\n  \"lastName\": \"dePrueba2\",\n  \"email\": \"prueba@front.com\",\n  \"password\": \"aA123456\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "1eb4197c-9e86-4d5e-bb1b-f55104e79fc0",
+            "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
+            "containerId": "2c6db274-6715-484e-af6e-c307be53dca7",
+            "name": "Get services",
+            "url": "api-TuTattoo.up.railway.app/api/services",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-02-29T21:28:30.378Z",
+            "modified": "2024-06-18T15:21:25.883Z",
+            "headers": []
+        },
+        {
+            "_id": "b462957f-a87f-4d6c-a55a-6580039075ef",
+            "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
+            "containerId": "291f2ce1-e017-4324-8ce6-d3849d9c2f12",
+            "name": "Get Profile",
+            "url": "api-TuTattoo.up.railway.app/api/users/profile",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-02-29T23:06:02.104Z",
+            "modified": "2024-06-18T15:20:57.118Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE3MTE1Mjc5NzksImV4cCI6MTcxMjI0Nzk3OX0.tF2TnSo7dSENXI7fmwzG_tAMtU6JAWBVYDEbY4CU0rA"
+            }
+        },
+        {
+            "_id": "56a685f0-0fcb-46e4-aef7-464b7450d889",
+            "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
+            "containerId": "6cb26b60-5cff-4a91-91a2-71602e073f9b",
+            "name": "Create Appointment",
+            "url": "api-TuTattoo.up.railway.app/api/appointments",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2024-03-01T18:01:03.625Z",
+            "modified": "2024-06-18T15:21:41.686Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"appointmentDate\": \"2028-12-11 18:00:00\",\n  \"serviceId\": \"3\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE3MTE1MzExNjcsImV4cCI6MTcxMjI1MTE2N30.otflFDauAm8bR5E4xZ3nQ8KDwQXiq-qJRlOyaMJGefg"
+            }
+        },
+        {
+            "_id": "20fb728b-bb84-406d-876b-2c861afe8ee3",
+            "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
+            "containerId": "291f2ce1-e017-4324-8ce6-d3849d9c2f12",
+            "name": "Update Profile",
+            "url": "api-TuTattoo.up.railway.app/api/users/profile",
+            "method": "PUT",
+            "sortNum": 50000,
+            "created": "2024-03-01T18:57:47.435Z",
+            "modified": "2024-06-18T15:21:03.068Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"firstName\": \"super\",\n  \"lastName\": \"admin\",\n  \"email\": \"superadmin@superadmin.com\",\n  \"password\": \"aA123456\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE3MTEzMDQzMTIsImV4cCI6MTcxMjAyNDMxMn0.KDAIGNBTfkzXo2txZZtRV8x0CeDM-SNklA9cV23s64w"
+            }
+        },
+        {
+            "_id": "81787e30-1587-446b-8dd4-d4f0517c6ac6",
+            "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
+            "containerId": "6cb26b60-5cff-4a91-91a2-71602e073f9b",
+            "name": "Update Appointment",
+            "url": "api-TuTattoo.up.railway.app/api/appointments",
+            "method": "PUT",
+            "sortNum": 60000,
+            "created": "2024-03-01T19:26:14.057Z",
+            "modified": "2024-06-18T15:21:51.008Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n \"appointmentId\": 51,\n \"appointmentDate\": \"2026-06-26 14:00:00\",\n \"serviceId\": 5\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE3MTAwOTYwOTMsImV4cCI6MTcxMDEwMzI5M30.5VB7qkNwSC5Ue2cuZcCenkmla0GT54YShgsxd_nPmi8"
+            }
+        },
+        {
+            "_id": "5e749999-78d0-490c-8071-119c674d3e0e",
+            "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
+            "containerId": "6cb26b60-5cff-4a91-91a2-71602e073f9b",
+            "name": "Get An Appointment",
+            "url": "api-TuTattoo.up.railway.app/api/appointments/51",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2024-03-02T14:46:37.458Z",
+            "modified": "2024-06-18T15:21:57.086Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsInJvbGVOYW1lIjoidXNlciIsImlhdCI6MTcxMDA5NzUyOSwiZXhwIjoxNzEwMTA0NzI5fQ.lXr27QWFggPmzQIwbCofTYJ0_VNxqlEguhKNF1yvAvs"
+            }
+        },
+        {
+            "_id": "3d88f0f8-a5e4-4a8f-92cd-00a4e1e0c270",
+            "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
+            "containerId": "6cb26b60-5cff-4a91-91a2-71602e073f9b",
+            "name": "Get My Appointments",
+            "url": "api-TuTattoo.up.railway.app/api/appointments",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2024-03-02T15:46:53.831Z",
+            "modified": "2024-06-18T15:22:03.635Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoic3VwZXJfYWRtaW4iLCJmaXJzdE5hbWUiOiJBbnR1YW4iLCJpYXQiOjE3MTE2MjQxMzksImV4cCI6MTcxMjM0NDEzOX0.oMQO-qYpOJmf_tY_sEL44bFvfx_jHDUysXzsGiyHwrA"
+            }
+        },
+        {
+            "_id": "96f8b152-8870-4af4-9ef8-e5c5530b90d4",
+            "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
+            "containerId": "291f2ce1-e017-4324-8ce6-d3849d9c2f12",
+            "name": "Get Users",
+            "url": "api-TuTattoo.up.railway.app/api/users",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2024-03-04T09:08:13.362Z",
+            "modified": "2024-06-18T15:20:08.501Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE3MTg3MjM5OTksImV4cCI6MTcxODczMTE5OX0.UaqlsUZ-3ozXEg-ROzzCvkWyTY79hk4AB2bUV4ys3Js"
+            }
+        },
+        {
+            "_id": "d6f15cf9-c4b1-4979-97ec-ac9f414e87d5",
+            "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
+            "containerId": "6cb26b60-5cff-4a91-91a2-71602e073f9b",
+            "name": "Delete My Appointment",
+            "url": "api-TuTattoo.up.railway.app/api/appointments",
+            "method": "DELETE",
+            "sortNum": 100000,
+            "created": "2024-03-30T11:35:38.323Z",
+            "modified": "2024-06-18T15:22:13.413Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"appointmentId\": \"55\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoic3VwZXJfYWRtaW4iLCJmaXJzdE5hbWUiOiJBbnR1YW4iLCJpYXQiOjE3MTE3OTk1MjUsImV4cCI6MTcxMjUxOTUyNX0.zXRj-_9R5RNl55ZSSIiJpStph2IisgbZDKQONZIlE10"
+            }
+        },
+        {
+            "_id": "da978696-ab19-4bac-861d-76bbcb9c5862",
+            "colId": "cb5015b3-74bf-44fc-b5f5-c818a0f6c213",
+            "containerId": "291f2ce1-e017-4324-8ce6-d3849d9c2f12",
+            "name": "Delete User By Id",
+            "url": "api-TuTattoo.up.railway.app/api/users/21",
+            "method": "DELETE",
+            "sortNum": 110000,
+            "created": "2024-03-30T17:55:25.609Z",
+            "modified": "2024-06-18T15:21:08.759Z",
+            "headers": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGVOYW1lIjoic3VwZXJfYWRtaW4iLCJmaXJzdE5hbWUiOiJBbnR1YW4iLCJpYXQiOjE3MTE4MjEzNjYsImV4cCI6MTcxMjU0MTM2Nn0.QOAJ9z6zapJKvGkC_6gK-XoS7sC-u2Y0aUxtwchPJLQ"
+            }
+        }
+    ],
+    "ref": "9OzR8BniHEnjyXN5jQxlQXQQuOvEse7nZCfdjTuZ9_aRkE4q3PG2bYZ8VvSrIrWFyStbvXoLcTXO5ZNXU9nKkA"
+}

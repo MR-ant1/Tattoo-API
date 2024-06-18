@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteRoles = exports.updateRoles = exports.createRoles = exports.getRoles = void 0;
+exports.createRoles = exports.getRoles = void 0;
 const Role_1 = require("../models/Role");
 const getRoles = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -60,39 +60,3 @@ const createRoles = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.createRoles = createRoles;
-const updateRoles = (req, res) => {
-    try {
-        req.params.id;
-        console.log(req.params.id);
-        res.status(200).json({
-            success: true,
-            message: 'roles Updated succesfully'
-        });
-    }
-    catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "can't update roles",
-            error: error
-        });
-    }
-};
-exports.updateRoles = updateRoles;
-const deleteRoles = (req, res) => {
-    try {
-        req.params.id;
-        console.log(req.params.id);
-        res.status(200).json({
-            success: true,
-            message: 'roles deleted succesfully'
-        });
-    }
-    catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "can't delete roles",
-            error: error
-        });
-    }
-};
-exports.deleteRoles = deleteRoles;

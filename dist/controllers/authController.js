@@ -22,10 +22,16 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         const lastName = req.body.lastName;
         const email = req.body.email;
         const password = req.body.password;
-        if (password.length < 8 || password.length > 20) {
+        if (firstName.length < 3 || lastName.length < 3) {
             return res.status(400).json({
                 success: false,
-                message: "Password must contain between 6 and 10 characters"
+                message: "FirstName and lastName must contain at least 3 characters"
+            });
+        }
+        if (password.length < 8 || password.length > 14) {
+            return res.status(400).json({
+                success: false,
+                message: "Password must contain between 8 and 14 characters"
             });
         }
         const validEmail = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/;
@@ -36,7 +42,6 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             });
         }
         const passwordEncrypted = bcrypt_1.default.hashSync(password, 5);
-        console.log(passwordEncrypted);
         const newUser = yield User_1.User.create({
             firstName: firstName,
             lastName: lastName,
@@ -47,7 +52,7 @@ const registerUser = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         res.status(201).json({
             success: true,
             message: "User registered succesfully",
-            data: newUser
+            data: firstName
         });
     }
     catch (error) {
@@ -76,7 +81,6 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 message: "Email format is not valid"
             });
         }
-        //   |  DE MANERA TEMPORAL SE INCLUYE ANY AL NO PODER DELCARARSE USER EN LA VERIFICACION DE CONTRASEÑA
         const user = yield User_1.User.findOne({
             where: {
                 email: email
@@ -86,6 +90,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             },
             select: {
                 id: true,
+                firstName: true,
                 password: true,
                 email: true,
                 role: {
@@ -95,7 +100,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             }
         });
         if (!user) {
-            res.status(400).json({
+            return res.status(400).json({
                 success: false,
                 message: "Email or password invalid"
             });
@@ -109,9 +114,10 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         }
         const token = jsonwebtoken_1.default.sign({
             userId: user.id,
-            roleName: user.role.name
+            roleName: user.role.name,
+            firstName: user.firstName,
         }, process.env.JWT_SECRET, {
-            expiresIn: "2h"
+            expiresIn: "200h"
         });
         res.status(200).json({
             success: true,

@@ -9,6 +9,7 @@ const isSuperAdmin = (req, res, next) => {
                 message: "You dont have authorization"
             });
         }
+        next();
     }
     catch (error) {
         res.status(500).json({

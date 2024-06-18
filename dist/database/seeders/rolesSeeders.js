@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.roleSeedDataBase = void 0;
 const db_1 = require("../db");
 const Role_1 = require("../../models/Role");
 const roleSeedDataBase = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -31,4 +32,4 @@ const roleSeedDataBase = () => __awaiter(void 0, void 0, void 0, function* () {
         yield db_1.AppDataSource.destroy();
     }
 });
-roleSeedDataBase();
+exports.roleSeedDataBase = roleSeedDataBase;

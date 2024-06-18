@@ -33,16 +33,16 @@ __decorate([
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ name: "password_hash" }),
+    (0, typeorm_1.Column)({ name: "password_hash", select: false }),
     __metadata("design:type", String)
 ], User.prototype, "password", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => Role_1.Role, (roles) => roles.users),
+    (0, typeorm_1.ManyToOne)(() => Role_1.Role, (role) => role.users),
     (0, typeorm_1.JoinColumn)({ name: 'role_id' }),
     __metadata("design:type", Role_1.Role)
 ], User.prototype, "role", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => Appointment_1.Appointment, (appointments) => appointments.user),
+    (0, typeorm_1.OneToMany)(() => Appointment_1.Appointment, (appointment) => appointment.user),
     __metadata("design:type", Appointment_1.Appointment)
 ], User.prototype, "appointments", void 0);
 exports.User = User = __decorate([

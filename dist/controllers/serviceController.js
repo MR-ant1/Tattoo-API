@@ -9,15 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteServices = exports.updateServices = exports.createServices = exports.getServices = void 0;
+exports.createServices = exports.getServices = void 0;
 const Service_1 = require("../models/Service");
 const getServices = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const users = yield Service_1.Service.find();
+        const services = yield Service_1.Service.find();
         res.status(200).json({
             success: true,
             message: 'Services retrieved succesfully',
-            data: users
+            data: services
         });
     }
     catch (error) {
@@ -57,38 +57,3 @@ const createServices = (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
 });
 exports.createServices = createServices;
-const updateServices = (req, res) => {
-    try {
-        req.params.id;
-        console.log(req.params.id);
-        res.status(200).json({
-            success: true,
-            message: 'Services updated succesfully'
-        });
-    }
-    catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Couldnt update Service",
-            error: error
-        });
-    }
-};
-exports.updateServices = updateServices;
-const deleteServices = (req, res) => {
-    try {
-        req.params.id;
-        res.status(200).json({
-            success: true,
-            message: 'Services deleted succesfully'
-        });
-    }
-    catch (error) {
-        res.status(500).json({
-            success: false,
-            message: "Couldnt delete Service",
-            error: error
-        });
-    }
-};
-exports.deleteServices = deleteServices;
