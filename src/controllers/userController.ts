@@ -80,7 +80,7 @@ export const getUserById = async (req: Request, res: Response) => {
 export const getProfile = async (req: Request, res: Response) => {
     try {
         const userId = req.tokenData.userId
-        console.log(userId)
+
         const user = await User.findOneBy(
             { id: (userId) }
         )
